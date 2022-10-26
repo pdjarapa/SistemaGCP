@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,6 +29,9 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+CUSTOM_INSTALLED_APPS = [
+    'app.core'
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -37,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app.core'
-]
+] + CUSTOM_INSTALLED_APPS
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +57,7 @@ ROOT_URLCONF = 'cfg.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'BACKEND': 'ddd.template.finder.DddTemplates',
         'DIRS': [BASE_DIR / 'presentation' / 'templates']
         ,
         'APP_DIRS': True,
@@ -113,11 +116,31 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Configuración n-layer architecture
+CUSTOM_MODELS_MODULE = "domain.models"
+CUSTOM_MIGRATIONS_MODULE = "infraestructure.migrations"
+CUSTOM_ADMIN_MODULE = "presentation.admin"
+CUSTOM_APP_TEMPLATE_DIR = "presentation.templates"
+CUSTOM_APP_TEMPLATETAGS_DIR = "presentation.templatetags"
+CUSTOM_APP_STATIC_DIR = "presentation.static"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = 'staticfiles'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'ddd.static.finder.DddAppDirectoriesFinder',
+]
+
+for app in  CUSTOM_INSTALLED_APPS:
+    app_static = os.path.join(BASE_DIR, app.replace('app.','app/'), CUSTOM_APP_STATIC_DIR.replace(".", '/'))
+    #print('app_static', app_static)
+    STATICFILES_DIRS.append(app_static)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
