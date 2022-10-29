@@ -4,7 +4,9 @@ from django.shortcuts import render, get_object_or_404
 
 #from app.core import DataTableParams
 from app.seguridad.application.notificacion_app_service import NotificacionAppService
-from app.seguridad.domain.models import Usuario
+from app.seguridad.domain.models import Usuario, NotificacionUsuario
+
+
 #from app.asistencia.infraestructure.external.siaaf_app_service import SiaafAppService
 
 @login_required
@@ -50,12 +52,3 @@ def notificacion_usuario_lista_paginador(request):
 
     except Exception as e:
         return HttpResponseServerError(e)
-
-
-@login_required
-def get_foto_thumbnail(request, user_id):
-    user = Usuario.objects.get(id=user_id)
-    data = SiaafAppService.get_foto_thumbnail(user.correo_electronico)
-    if data:
-        return JsonResponse(data, safe=False)
-    return JsonResponse('', safe=False)

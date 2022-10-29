@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for cfg project.
 
@@ -16,7 +17,8 @@ from django.apps import apps
 BASE_DIR = Path(__file__).resolve().parent.parent
 print('BASE_DIR', BASE_DIR)
 
-SYSTEM_NAME = "Sistema de Gestin de Casos de Prueba"
+SYSTEM_NAME = "Sistema de Gestión de Casos de Prueba"
+SYSTEM_SNAME = "Sistema GCP"
 SYSTEM_ALIAS = "SGCP"
 
 # Configuración n-layer architecture

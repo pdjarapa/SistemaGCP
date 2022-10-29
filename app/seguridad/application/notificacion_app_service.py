@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db.models import Q
 from django.template.loader import render_to_string
 
-#from app.seguridad.domain.models import Notificacion, NotificacionUsuario
+from app.seguridad.domain.models import Notificacion, NotificacionUsuario
 
 
 class NotificacionAppService(object):

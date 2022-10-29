@@ -10,17 +10,25 @@
     <title>{% system_alias %} - {% block titulo %}Inicio{% endblock %}</title>
     <!-- icons -->
     {% load static %}
-    <link href="{% static 'fonts/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
     <!-- bootstrap -->
+<!--
     <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css"/>
+-->
+    <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+
     <link href="{% static 'css/sweetalert2/sweetalert2.min.css' %}" rel="stylesheet" type="text/css"/>
 
     <!-- Google Fonts -->
-    <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-            rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
     <link href="{% static 'plugins/arsha/css/style.css' %}" rel="stylesheet">
+    <style type="text/css">
+        .background-hero {
+          background: rgba(15, 24, 41, 0.88);
+
+        }
+    </style>
 
     {% block estilos-primer-nivel %}    {% endblock estilos-primer-nivel %}
 

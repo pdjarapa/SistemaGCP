@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Log in (v2)</title>
+    <title>{% system_alias %} - Login</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -21,10 +21,10 @@
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
-            <a href="/" class="h1"><b>Sistema</b> GCP</a>
+            <a href="/" class="h1"><b>Sistema</b> {% system_alias %}</a>
         </div>
         <div class="card-body">
-            <p class="login-box-msg">Iniciar sesin</p>
+            <p class="login-box-msg">Iniciar sesión</p>
 
             <form action="{% block action %}{% endblock %}" method="post">
                 {% csrf_token %}
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="row col">
-                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
                 </div>
 
             </form>
@@ -79,7 +79,7 @@
             <!-- /.social-auth-links -->
 
             <p class="mb-1">
-                <a href="forgot-password.html">Olvid mi contraseña</a>
+                <a href="forgot-password.html">Olvidé mi contraseña</a>
             </p>
             <!--
           <p class="mb-0">

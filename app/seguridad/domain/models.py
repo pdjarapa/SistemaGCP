@@ -175,6 +175,28 @@ class Usuario(AbstractBaseUser, PermissionsMixin, AuditModel):
     def get_display_name(self):
         return self.descripcion if self.descripcion else self.correo_electronico
 
+class Notificacion(AuditModel):
+    asunto = models.TextField()
+    envio_email = models.DateField(null=True)
+    mensaje = models.TextField()
+    url = models.TextField(null=True)
+
+class NotificacionUsuario(models.Model):
+    ESTADO_VISTO = 'V'
+    ESTADO_LEIDO = 'L'
+    ESTADO_PENDIENTE = 'P'
+    CHOICE_ESTADO = ((ESTADO_PENDIENTE, 'Pendiente'),
+                     (ESTADO_VISTO, 'Visto'),
+                     (ESTADO_LEIDO, 'Leído'),)
+
+    estado = models.CharField(max_length=1, choices=CHOICE_ESTADO, default=ESTADO_PENDIENTE)
+
+    notificacion = models.ForeignKey('Notificacion', on_delete=models.CASCADE)
+    usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['usuario', '-notificacion__created_at']
+
 user_logged_in.connect(SessionActivity.create_session_activity)
 user_logged_out.connect(SessionActivity.end_session_activity)
 #auditlog.register(NotificacionUsuario, include_fields=['estado'])

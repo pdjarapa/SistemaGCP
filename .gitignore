@@ -1,0 +1,18 @@
+#Ignora recursos
+__pycache__/
+media/
+staticfiles/
+*migrations/
+
+#extensions to ignore
+*.log
+*.map
+*.pot
+*.pyc
+*.pyd
+*.pyo
+
+#directories to ignore
+*.vscode/
+.idea/
+.installed.cfg

@@ -14,6 +14,10 @@ def system_name():
     return settings.SYSTEM_NAME
 
 @register.simple_tag
+def system_sname():
+    return settings.SYSTEM_SNAME
+
+@register.simple_tag
 def system_alias():
     return settings.SYSTEM_ALIAS
 

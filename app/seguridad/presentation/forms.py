@@ -69,19 +69,3 @@ class EditarContrasenaForm(forms.Form):
             raise forms.ValidationError('Las contraseñas no coinciden.')
         return password2
 
-
-class IniciarSesionSolicitanteForm(forms.Form):
-    correo_electronico = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'input'}))
-    token = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
-    #fecha_nacimiento = forms.DateField(widget=forms.DateInput(attrs={'class': 'input'}))
-    #profesion = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
-
-    def clean_profesion(self):
-        usuario = Usuario.objects.filter(correo_electronico=self.data.get('correo_electronico')).first()
-        print('Correo electronico')
-        print(self.data.get('correo_electronico'))
-        print(self.data.get('profesion'))
-        if usuario.persona and self.data.get('profesion') != usuario.persona.profesion:
-            print('aqui esta entrando')
-            raise forms.ValidationError('La profesión no coincide con el registro')
-        return self.data['profesion']

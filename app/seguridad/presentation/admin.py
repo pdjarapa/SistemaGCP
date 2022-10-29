@@ -67,5 +67,4 @@ class SessionActivityAdmin(admin.ModelAdmin):
 admin.site.register(Funcionalidad, FuncionalidadAdmin)
 admin.site.register(FuncionalidadGroup, FuncionalidadGrupoAdmin)
 admin.site.register(Usuario, UsuarioAdmin)
-#admin.site.register(Persona, PersonaAdmin)
 admin.site.register(SessionActivity, SessionActivityAdmin)
