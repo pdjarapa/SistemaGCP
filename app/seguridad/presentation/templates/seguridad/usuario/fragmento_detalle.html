@@ -1,0 +1,37 @@
+{% load usuario_tags %}
+<div class="table-responsive">
+    <table class="table table-hover">
+        <tbody>
+        <tr>
+            <th>Identificación</th>
+            <td>{{ usuario.identificacion }}</td>
+        </tr>
+        <tr>
+            <th>Nombre de usuario</th>
+            <td>{{ usuario.get_display_name }}</td>
+        </tr>
+        <tr>
+            <th>Correo electrónico</th>
+            <td>
+                <span class="text-success">{{ usuario.correo_electronico }}</span>
+            </td>
+        </tr>
+        {% if usuario.is_admin %}
+            <tr>
+                <th>Administrador</th>
+                <td>
+                    <span class="fas fa-check" aria-hidden="true"></span>
+                </td>
+            </tr>
+        {% endif %}
+        {% if usuario.activo %}
+            <tr>
+                <th>Activo</th>
+                <td>
+                    <span class="fas fa-check" aria-hidden="true"></span>
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>

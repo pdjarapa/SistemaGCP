@@ -1,0 +1,21 @@
+{% extends 'email.html' %}
+{% load core_tags %}
+{% block email_body %}
+    <h1 class="asunto">
+        {{ notificacion.asunto }}
+    </h1>
+
+    <p style="text-align: justify"><b>Estimado/a,</b></p>
+
+    <p style="text-align: justify">
+        {{notificacion.mensaje |safe}}
+    </p>
+
+    {% if notificacion.url %}
+        <p style="text-align: justify">
+            Puede revisar el detalle ingresando a
+            <a class="btn" href="{{ siaaf_url  }}{{ notificacion.url }}">
+                <span class="fas fa-search"></span> Ver detalle</a>
+        </p>
+    {% endif %}
+{% endblock email_body %}

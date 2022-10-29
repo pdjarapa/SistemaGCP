@@ -1,0 +1,8 @@
+{% extends 'layout_email.html' %}
+{% block contenido %}
+    <p align="justify"><b>Estimada/o: {{ usuario.correo_electronico }}</b></p>
+    <p align="justify">
+        Para continuar con el registro copiar el código de verificación en el formulario de registro <strong></strong>
+    </p>
+    <h4>"{{usuario.token}}"</h4>
+{% endblock contenido %}

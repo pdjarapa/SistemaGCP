@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block titulo %}
+    Notificación
+{% endblock %}
+
+
+{% block contenido %}
+    <div class="card card-box">
+        <div class="card-head">
+            <header>Notificación</header>
+            <div class="tools">
+                <a class="btn btn-primary btn-lg" href="{% url 'seguridad:notificacion_usuario_lista' %}"><span
+                        class="fas fa-arrow-left"></span> Regresar a mis notificaciones</a>
+            </div>
+        </div>
+        <div class="card-body notificaciones">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group form-inline">
+                        <span class="col-md-2 text-right"><b>Creado el:</b></span>
+                        <div class="col-md-10">
+                            <p class="form-control-static ">{{ notificacion_usuario.notificacion.created_at }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group form-inline text-left">
+                        <span class="col-md-2 text-right"><b>Asunto:</b></span>
+                        <div class="col-md-10">
+                            <p class="form-control-static">{{ notificacion_usuario.notificacion.asunto }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group form-inline text-left">
+                        <span class="col-md-2 text-right"><b>Mensaje:</b></span>
+                        <div class="col-md-10">
+                            <p class="form-control-static">{{ notificacion_usuario.notificacion.mensaje|safe }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% if notificacion_usuario.notificacion.url %}
+                    <div class="col-md-12 text-center btn btn-primary notificacion-ver-detaller">
+                        <span class="fas fa-eye"></span>
+                        <a href="{{ notificacion_usuario.notificacion.url }}"> Ver detalle</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}

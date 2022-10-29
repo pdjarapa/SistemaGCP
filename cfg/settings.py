@@ -11,9 +11,21 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
-
+from django.apps import apps
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+print('BASE_DIR', BASE_DIR)
+
+SYSTEM_NAME = "Sistema de Gestin de Casos de Prueba"
+SYSTEM_ALIAS = "SGCP"
+
+# Configuración n-layer architecture
+CUSTOM_MODELS_MODULE = "domain.models"
+CUSTOM_MIGRATIONS_MODULE = "infraestructure.migrations"
+CUSTOM_ADMIN_MODULE = "presentation.admin"
+CUSTOM_APP_TEMPLATETAGS_DIR = "presentation.templatetags"
+CUSTOM_APP_TEMPLATE_DIR =  "presentation" + os.sep + "templates"
+CUSTOM_APP_STATIC_DIR = "presentation" + os.sep + "static"
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,20 +39,26 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'seguridad.Usuario'
+LOGIN_URL= '/seguridad/accounts/login'
 
 # Application definition
 CUSTOM_INSTALLED_APPS = [
-    'app.core'
+    'app.core.apps.CoreConfig',
+    'app.seguridad.apps.SeguridadConfig'
 ]
 
-INSTALLED_APPS = [
+LIB_INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-] + CUSTOM_INSTALLED_APPS
+    'auditlog'
+]
+
+INSTALLED_APPS = LIB_INSTALLED_APPS + CUSTOM_INSTALLED_APPS
 
 
 MIDDLEWARE = [
@@ -55,11 +73,16 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'cfg.urls'
 
+TEMPLATES_DIRS = ['templates', os.path.join(BASE_DIR / 'presentation' / 'templates')]
+for app in CUSTOM_INSTALLED_APPS:
+    apath = app.split('.')
+    app_templates = os.path.join(BASE_DIR, apath[0], apath[1], CUSTOM_APP_TEMPLATE_DIR)
+    TEMPLATES_DIRS.append(app_templates)
+
 TEMPLATES = [
     {
         'BACKEND': 'ddd.template.finder.DddTemplates',
-        'DIRS': [BASE_DIR / 'presentation' / 'templates']
-        ,
+        'DIRS': TEMPLATES_DIRS,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +91,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'builtins': ['app.core.presentation.templatetags.core_tags'],
         },
     },
 ]
@@ -78,11 +102,26 @@ WSGI_APPLICATION = 'cfg.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'OPTIONS': {
+            'options': '-c search_path=django,public'
+        },
+        'NAME': 'gpc',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+
+    },
 }
 
 
@@ -116,13 +155,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-# Configuración n-layer architecture
-CUSTOM_MODELS_MODULE = "domain.models"
-CUSTOM_MIGRATIONS_MODULE = "infraestructure.migrations"
-CUSTOM_ADMIN_MODULE = "presentation.admin"
-CUSTOM_APP_TEMPLATE_DIR = "presentation.templates"
-CUSTOM_APP_TEMPLATETAGS_DIR = "presentation.templatetags"
-CUSTOM_APP_STATIC_DIR = "presentation.static"
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -137,8 +170,9 @@ STATICFILES_FINDERS = [
     'ddd.static.finder.DddAppDirectoriesFinder',
 ]
 
-for app in  CUSTOM_INSTALLED_APPS:
-    app_static = os.path.join(BASE_DIR, app.replace('app.','app/'), CUSTOM_APP_STATIC_DIR.replace(".", '/'))
+for app in CUSTOM_INSTALLED_APPS:
+    apath = app.split('.')
+    app_static = os.path.join(BASE_DIR, apath[0], apath[1], CUSTOM_APP_STATIC_DIR)
     #print('app_static', app_static)
     STATICFILES_DIRS.append(app_static)
 

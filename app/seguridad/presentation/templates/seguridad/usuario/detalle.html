@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load usuario_tags %}
+
+
+{% block titulo %}
+    Inicio
+{% endblock %}
+
+{% block migas %}
+    <div class="page-bar">
+        <div class="page-title-breadcrumb">
+            <div class=" pull-left">
+                <div class="page-title">Bienvenido</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    <div class="row">
+        {% block usuario_notificaciones %}
+        {% endblock usuario_notificaciones %}
+    </div>
+    <div class="row card-group">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-padding-bottom">
+            <div class="card h-100">
+                <div class="card-header"><h3>Datos de cuenta</h3></div>
+                <div class="card-body">
+                    {% include 'seguridad/usuario/fragmento_detalle.html' with usuario=usuario %}
+                </div>
+            </div>
+        </div>
+
+        {% for miebro in miembros %}
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-padding-bottom">
+                {% include 'grupo/fragmento_grupo_card.html' with miebro=miebro %}
+            </div>
+        {% endfor %}
+
+
+        {% block usuario_card %}
+        {% endblock usuario_card %}
+    </div>
+{% endblock contenido %}
+
+{% block javascript-primer-nivel %}
+    {% load static %}
+    <script src="{% static 'js/asistencia/registrar.js' %}"></script>
+    <script>var csrf_token = "{{csrf_token}}";</script>
+{% endblock javascript-primer-nivel  %}

@@ -1,0 +1,28 @@
+{% load usuario_tags %}
+{% get_es_actor request.user as es_actor %}
+
+{% if es_actor %}
+    <div class="card">
+        <div class="card-head card-topline-aqua bg-b-yellow">
+            <header>Manuales</header>
+            <i class="fa fa-question-circle pull-right"></i>
+        </div>
+        <div class="card-body p-0 height-9">
+            <div class="table-responsive">
+                <div class="bg-light text-center p-2">Para poder acceder a los manuales, debe hacerlo desde su correo
+                    institucional.
+                </div>
+                <ul class="list-group" style="display: block;">
+                    <li class="list-group-item">
+                        <a target="_blank" rel="noreferrer nooponer nofollow"
+                           title="Manual de responsables de seguimiento"
+                           href="#">
+                            <i class="fa fa-file-pdf-o text-danger"></i>
+                            <span class="title">Manual del Responsable de Fases</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endif %}

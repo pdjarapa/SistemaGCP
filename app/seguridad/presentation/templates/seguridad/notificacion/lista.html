@@ -1,0 +1,24 @@
+{% extends 'lista.html' %}
+
+{% block titulo %}
+    Notificaciones
+{% endblock %}
+
+{% load static %}
+
+{% block card-title %} Mis notificaciones {% endblock %}
+
+{% block table-head %}
+    <th>Asunto</th>
+    <th>Fecha</th>
+    <th>Estado</th>
+{% endblock %}
+
+{% block javascript-segundo-nivel %}
+    <script>
+        var basehref = "{% get_basehref %}"
+        var url_notificaion_usuario_lista_paginador = "{% url 'seguridad:notificacion_usuario_lista_paginador' %}";
+    </script>
+    <script src="{% static 'js/js_cookie.js' %}"></script>
+    <script src="{% static 'js/notificacion_usuario_lista.js' %}"></script>
+{% endblock %}

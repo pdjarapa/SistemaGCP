@@ -1,0 +1,62 @@
+.iniciar-sesion-solicitante-container {
+    width: 70%;
+}
+
+.login-solicitante-card {
+    margin-top: 40px;
+}
+
+.has-error {
+    color: red;
+}
+
+.login-solicitante-title, label, .acuerdo {
+    color: rgba(40, 58, 90, 1);
+}
+
+.login-solicitante-button, .codigo-botones {
+    background-color: rgba(40, 58, 90, 1);
+    color: #fff;
+}
+
+.login-solicitante-button {
+    font-weight: 600;
+}
+
+.title-registro {
+    color: rgba(40, 58, 90, 1);
+}
+
+@media (max-width: 768px) {
+    .iniciar-sesion-solicitante-container {
+        width: 95%;
+    }
+}
+
+@media (max-width: 481px) {
+    .input-group-append {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .input-group > .form-control {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .input-group > .input-group-append {
+        width: 100%;
+    }
+
+    .codigo-botones {
+        width: 100%;
+        border-radius: 2px !important;
+    }
+}

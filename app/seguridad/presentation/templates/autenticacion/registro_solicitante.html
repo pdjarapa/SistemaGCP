@@ -1,0 +1,486 @@
+{% extends 'principal_layout.html' %}
+
+{% load staticfiles %}
+
+{% block estilos-primer-nivel %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/registro.css' %}">
+{% endblock %}
+
+{% block contenido %}
+    <div class="section-bg h-100">
+
+        <header id="header" class="fixed-top header-tipo-usuario ">
+            <div class="container d-flex align-items-center">
+                <a href="#" class="logo mr-auto"><img src="{% static 'img/logo-white.png' %}"
+                                                      alt="Universidad Nacional de Loja" class="img-fluid"></a>
+
+                <a href="{% url 'index' %}" class="back-button scrollto">Volver al Inicio</a>
+            </div>
+        </header>
+
+
+        <section>
+            <div class="container h-100">
+                <div class="row h-100 justify-content-center align-items-center">
+                    <div class="mt-xl-5 iniciar-sesion-solicitante-container">
+                        <div class="card shadow login-solicitante-card">
+                            <div class="card-header text-center">
+                                <h4 class="login-solicitante-title">(Registrar) Iniciar Sesión - Solicitante </h4>
+                            </div>
+                            <div class="card-body">
+                                <!--Errores-->
+                                <div>
+                                    {% for msg in messages %}
+                                        <div class="alert alert-{{ msg.level_tag }}" role="alert">
+                                            {{ msg.message }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <form autocomplete="off"
+                                      action="{% block action %}{% endblock %}"
+                                      id="form_registro_solicitante"
+                                      name="form"
+                                      method="POST"
+                                      role="form">
+                                    {% csrf_token %}
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5 class="title-registro"> Datos Personales: </h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="{{ formulario.username.id_for_label }}">Cédula de
+                                                    identidad:</label>
+
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                                                        </span>
+                                                    </div>
+
+                                                    <input type="text" class="form-control"
+                                                           maxlength="20"
+                                                           id="{{ form.numero_documento.id_for_label }}"
+                                                           name="{{ form.numero_documento.name }}"
+                                                           placeholder="Ingrese su número de cédula"
+                                                           required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="{{ formulario.username.id_for_label }}">Celular:</label>
+
+                                                <div class="input-group">
+
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="fa fa-mobile" aria-hidden="true"></i>
+                                                        </span>
+                                                    </div>
+
+                                                    <input type="text" class="form-control"
+                                                           maxlength="10"
+                                                           id="{{ form.celular.id_for_label }}"
+                                                           name="{{ form.celular.name }}"
+                                                           placeholder="Ingrese su número de celular"
+                                                           required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <!--Primer nombre-->
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="{{ form.primer_nombre.id_for_label }}">Primer
+                                                    nombre:</label>
+
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control"
+                                                           maxlength="140"
+                                                           id="{{ form.primer_nombre.id_for_label }}"
+                                                           name="{{ form.primer_nombre.name }}"
+                                                           placeholder="Ingrese su primer nombre"
+                                                           required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Segundo nombre-->
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="{{ form.segundo_nombre.id_for_label }}">Segundo
+                                                    nombre:</label>
+
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control"
+                                                           maxlength="140"
+                                                           id="{{ form.segundo_nombre.id_for_label }}"
+                                                           name="{{ form.segundo_nombre.name }}"
+                                                           placeholder="Ingrese su segundo nombre"
+                                                           required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <!--Primer apellido-->
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="{{ form.primer_apellido.id_for_label }}">Primer
+                                                    apellido:</label>
+
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control"
+                                                           maxlength="140"
+                                                           id="{{ form.primer_apellido.id_for_label }}"
+                                                           name="{{ form.primer_apellido.name }}"
+                                                           placeholder="Ingrese su primer nombre"
+                                                           required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Segundo apellido-->
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="{{ form.segundo_apellido.id_for_label }}">Segundo
+                                                    apellido:</label>
+
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control"
+                                                           maxlength="140"
+                                                           id="{{ form.segundo_apellido.id_for_label }}"
+                                                           name="{{ form.segundo_apellido.name }}"
+                                                           placeholder="Ingrese su segundo nombre"
+                                                           required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5 class="title-registro"> Código de verificación: </h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="id_correo_electronico">Correo electrónico:</label>
+
+                                        <div class="input-group">
+                                            <input type="text" class="form-control"
+                                                   placeholder="Ingrese su correo electrónico"
+                                                   aria-label="Recipient's username"
+                                                   id="id_correo_electronico"
+                                                   name="correo_electronico"
+                                                   aria-describedby="btnEnviarToken"
+                                                   required>
+
+                                            <div class="input-group-append">
+                                                <button class="btn codigo-botones" id="btnEnviarToken" type="button"
+                                                        disabled>
+                                                    Solicitar Código de Verificación
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <small class="w-100">El código de verificacicón será enviado al correo
+                                            electrónico ingresado.</small>
+                                        <br>
+                                        <small class="w-100 d-none" id="m-error">
+                                            Error al enviar el código de verificación comuníquese con el administrador.
+                                        </small>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="alert alert-info alert-dismissible fade show"
+                                             id='mensaje_correo'
+                                             style="display: none">
+                                            <strong>Información!</strong> Token generado correctamente, revise su
+                                            correo
+                                            electrónico .
+                                            <button type="button" class="close" data-dismiss="alert">&times;
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="id_token">Código de
+                                            verificación:</label>
+
+                                        <div class="input-group">
+                                            <input type="text" class="form-control"
+                                                   placeholder="Ingrese el código de verificación"
+                                                   aria-label="Recipient's username"
+                                                   id="id_token"
+                                                   name="token"
+                                                   aria-describedby="btnValidarToken"
+                                                   required>
+
+                                            <div class="input-group-append">
+                                                <button class="btn codigo-botones" id="btnValidarToken" type="button"
+                                                        disabled>
+                                                    Verificar código
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <small class="w-100">Ingrese el código de verificación que se envió al correo
+                                            electrónico.</small>
+                                        <br>
+                                        <small class="w-100 d-none" id="t-error">El código de verificación no coincide.</small>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="alert alert-info alert-dismissible fade show"
+                                             id='mensaje_verifica_token'
+                                             style="display: none">
+                                            <strong>Información!</strong> Código verificado correctamente.
+                                            <button type="button" class="close" data-dismiss="alert">&times;
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <hr/>
+                                    <div id="bloque-preguntas" style="display: none">
+                                        <h5>Preguntas de Seguridad:</h5>
+
+                                    <small class="mb-2 text-justify w-100"
+                                           style="display: inline-block; text-decoration: underline">
+                                        <strong>Importante: </strong>Estás preguntas se le pedirán en cada ingreso del
+                                        sistema.
+                                    </small>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="{{ form.fecha_nacimiento.id_for_label }}">
+                                                    ¿Cuál es su fecha de nacimiento?
+                                                </label>
+                                                <input class="form-control"
+                                                       type="text"
+                                                       id="{{ form.fecha_nacimiento.id_for_label }}"
+                                                       name="{{ form.fecha_nacimiento.name }}"
+                                                       placeholder="Fecha de nacimiento"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="{{ form.profesion.id_for_label }}">
+                                                    ¿Cuál es su profesión?
+                                                </label>
+                                                <input class="form-control"
+                                                       type="text"
+                                                       id="{{ form.profesion.id_for_label }}"
+                                                       name="{{ form.profesion.name }}"
+                                                       placeholder="Profesion"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr/>
+                                    </div>
+
+
+
+                                    <div class="form-group align-items-center">
+                                        <input class="checkbox align-content-center"
+                                               type="checkbox"
+                                               id="{{ form.acuerdo.id_for_label }}"
+                                               name="{{ form.acuerdo.name }}"
+                                               required="required"/>
+                                        <label for="{{ form.acuerdo.id_for_label }}">
+                                            <a class="text-decoration-none acuerdo" href="#">
+                                                <i class="fa fa-search" aria-hidden="true"></i>
+                                                ¿Acepta el acuerdo de responsabilidad?
+                                            </a>
+                                        </label>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit"
+                                                class="btn login-solicitante-button" id="btnregistro">
+                                            <i class="fa fa-sign-in  mr-2" aria-hidden="true"></i>
+                                            Registrarse
+                                        </button>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="card-footer text-muted text-center">
+                                Módulo de Gestión de Trámites
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+    {#    <div class="container mt-lg-5">#}
+    {#        <div class="row">#}
+    {#            <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center">#}
+    {#                <div class="row">#}
+    {#                    <div class="col-lg-6 col-md-8 mx-auto">#}
+    {#                        <div>#}
+    {#                            {% for msg in messages %}#}
+    {#                                <div class="alert alert-{{ msg.level_tag }}" role="alert">#}
+    {#                                    {{ msg.message }}#}
+    {#                                </div>#}
+    {#                            {% endfor %}#}
+    {#                        </div>#}
+    {#                        <!-- form card login -->#}
+    {#                        <div class="card rounded shadow shadow-sm">#}
+    {#                            <div class="card-header">#}
+    {#                                <h3 class="mb-0">Ingresar(Registrar) como solicitante</h3>#}
+    {#                            </div>#}
+    {#                            <div class="card-body">#}
+    {#                                <div id="errores">#}
+    {##}
+    {#                                </div>#}
+    {#                                <form class="login100-form validate-form"#}
+    {#                                      id="form_registro_solicitante"#}
+    {#                                      name="form"#}
+    {#                                      action="{% block action %}{% endblock %}"#}
+    {#                                      method="POST"#}
+    {#                                      role="form">#}
+    {#                                    {% csrf_token %}#}
+    {#                            <span class="login100-form-logo-noclass">#}
+    {#                                <center>#}
+    {#                                    <img alt="unl" src="{% static 'img/logo.png' %}" width="280">#}
+    {#                                </center>#}
+    {#                            </span>#}
+    {#                            <span class="login100-form-title p-b-34 p-t-27"#}
+    {#                                  title="Sistema de Información Académico Administrativo Financiero">#}
+    {#                                Registrar Solicitante#}
+    {#                            </span>#}
+    {##}
+    {#                                    <div class="form-group">#}
+    {#                                        <input class="form-control"#}
+    {#                                               type="text"#}
+    {#                                               id="{{ form.numero_documento.id_for_label }}"#}
+    {#                                               name="{{ form.numero_documento.name }}"#}
+    {#                                               placeholder="Número documento"#}
+    {#                                               required="required"/>#}
+    {#                                        <span class="focus-input100" data-placeholder="&#xf007"></span>#}
+    {#                                    </div>#}
+    {#                                    <div class="form-group">#}
+    {#                                        <input class="form-control"#}
+    {#                                               type="text"#}
+    {#                                               id="{{ form.celular.id_for_label }}"#}
+    {#                                               name="{{ form.celular.name }}"#}
+    {#                                               placeholder="Celular"#}
+    {#                                               required="required"/>#}
+    {#                                        <span class="focus-input100" data-placeholder="&#xf007"></span>#}
+    {#                                    </div>#}
+    {#                                    <div class="form-group">#}
+    {#                                        <input class="form-control"#}
+    {#                                               type="text"#}
+    {#                                               id="{{ form.correo_electronico.id_for_label }}"#}
+    {#                                               name="{{ form.correo_electronico.name }}"#}
+    {#                                               placeholder="Correo Electrónico"#}
+    {#                                               required="required"/>#}
+    {#                                        <span class="focus-input100" data-placeholder="&#xf007"></span>#}
+    {#                                    </div>#}
+    {#                                    <div class="form-group">#}
+    {#                                        <button class="btn btn-info" id="btnEnviarToken" type="button" disabled>#}
+    {#                                            Solicitar código de verificación#}
+    {#                                        </button>#}
+    {#                                    </div>#}
+    {#                                    <div class="form-group">#}
+    {#                                        <div class="alert alert-info alert-dismissible fade show" id='mensaje_token'#}
+    {#                                             style="display: none">#}
+    {#                                            <strong>Info!</strong> Token generado correctamente, revise su correo#}
+    {#                                            electrónico .#}
+    {#                                            <button type="button" class="close" data-dismiss="alert">&times;</button>#}
+    {#                                        </div>#}
+    {#                                    </div>#}
+    {#                                    <hr>#}
+    {#                                    <div class="form-group">#}
+    {#                                        <input class="form-control"#}
+    {#                                               type="text"#}
+    {#                                               id="{{ form.token.id_for_label }}"#}
+    {#                                               name="{{ form.token.name }}"#}
+    {#                                               placeholder="Código de verificación"#}
+    {#                                               required="required"/>#}
+    {#                                        <span class="focus-input100" data-placeholder="&#xf007"></span>#}
+    {#                                    </div>#}
+    {#                                    <div class="form-group">#}
+    {#                                        <button class="btn btn-info" type="button" id="btnValidarToken" disabled>#}
+    {#                                            Verificar#}
+    {#                                        </button>#}
+    {#                                    </div>#}
+    {#                                    <hr>#}
+    {#                                    <h5><strong>Preguntas de seguridad:</strong></h5>#}
+    {#                                    <div class="form-group">#}
+    {#                                        <label for="{{ form.fecha_nacimiento.id_for_label }}"><strong>¿Cuál es su fecha#}
+    {#                                            de nacimiento?</strong></label>#}
+    {#                                        <input class="form-control"#}
+    {#                                               type="text"#}
+    {#                                               id="{{ form.fecha_nacimiento.id_for_label }}"#}
+    {#                                               name="{{ form.fecha_nacimiento.name }}"#}
+    {#                                               placeholder="Fecha de nacimiento"#}
+    {#                                               required="required"/>#}
+    {#                                        <span class="focus-input100" data-placeholder="&#xf007"></span>#}
+    {#                                    </div>#}
+    {#                                    <div class="form-group">#}
+    {#                                        <label for="{{ form.profesion.id_for_label }}"><strong>¿Cuál es su#}
+    {#                                            profesión?</strong></label>#}
+    {#                                        <input class="form-control"#}
+    {#                                               type="text"#}
+    {#                                               id="{{ form.profesion.id_for_label }}"#}
+    {#                                               name="{{ form.profesion.name }}"#}
+    {#                                               placeholder="Profesion"#}
+    {#                                               required="required"/>#}
+    {#                                        <span class="focus-input100" data-placeholder="&#xf007"></span>#}
+    {#                                    </div>#}
+    {#                                    <div class="form-group">#}
+    {#                                        <label for="{{ form.acuerdo.id_for_label }}">Acuerdo de responsabilidad:</label>#}
+    {#                                        <input class="checkbox align-content-center"#}
+    {#                                               type="checkbox"#}
+    {#                                               id="{{ form.acuerdo.id_for_label }}"#}
+    {#                                               name="{{ form.acuerdo.name }}"#}
+    {#                                       placeholder="Acuerdo de responsabilidad"#}
+    {#                                               required="required"/>#}
+    {#                                        <span class="focus-input100" data-placeholder="&#xf007"></span>#}
+    {#                                    </div>#}
+    {#                            <div class="container-login100-form-btn">#}
+    {#                                    <button type="submit" value="Registrar" class="btn btn-success btn-lg float-right">#}
+    {#                                        Registrar#}
+    {#                                    </button>#}
+    {#                            </div>#}
+    {#                                </form>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+    <script>
+        var url_enviar_token = "{% url 'seguridad:enviar_token' %}"
+        var url_verificar_token = "{% url 'seguridad:verificar_token' %}"
+        var url_verificar_persona = "{% url 'seguridad:verificar_persona' %}"
+        var url_proceso_lista = "{% url 'tramite:proceso_lista_estado' 5 %}"
+    </script>
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static '/js/solicitante.js' %}?v=1.1"></script>
+    <script type="text/javascript">
+        var BSG_API_URL = '{{ BSG_API_URL }}';
+    </script>
+{% endblock contenido %}
