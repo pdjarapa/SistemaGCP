@@ -1,6 +1,6 @@
 #Ignora recursos
 */migrations/
-*/__pycache__/
+__pycache__/
 
 #extensions to ignore
 *.log
