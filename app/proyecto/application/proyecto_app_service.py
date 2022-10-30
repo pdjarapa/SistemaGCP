@@ -35,13 +35,6 @@ class ProyectoAppService(object):
         :param params:
         :return:
         """
-        #empresa_codigo_sha = params.request.GET.get('empresa_sha')
-        #empresa = EmpresaAppService.get_por_codigo_sha(empresa_codigo_sha)
-
-        #estado, respuesta = RecaudacionSecService.usuario_acceso_empresa(params.request.user, empresa)
-        #if estado:
-        #import time
-        #time.sleep(3)
 
         params = DataTableParams(filter_values)
 
@@ -55,6 +48,10 @@ class ProyectoAppService(object):
                         Q(descripcion__icontains=i) |
                         Q(nombre__icontains=i)
                 )
+
+        activo = params.get_bool('filtro_activo')
+        if activo is not None:
+            qset = qset & Q(activo = activo)
 
         queryset = queryset.filter(qset)
         params.queryset = queryset
@@ -75,8 +72,8 @@ class ProyectoAppService(object):
         return params.result(data)
 
 
-    def cambiar_estado(self, espacio_id, estado, request):
-        proyecto = Proyecto.objects.get(id=espacio_id)
+    def cambiar_estado(self, proyecto_id, estado, request):
+        proyecto = Proyecto.objects.get(id=proyecto_id)
 
         proyecto.activo = estado
         proyecto.save()

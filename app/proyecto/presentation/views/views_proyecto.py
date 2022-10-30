@@ -88,12 +88,12 @@ class ProyectoUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateVie
 class ProyectoDetailView(PermissionRequiredMixin, DetailView):
     model = Proyecto
     template_name = 'proyecto/detalle.html'
-    context_object_name = 'espacio'
+    context_object_name = 'proyecto'
     permission_required = 'proyecto.change_proyecto'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        espacio = self.get_object()
+        proyecto = self.get_object()
         context['title'] = 'Detalle del proyecto'
         context['breadcrum'] = [
             ('Proyectos', reverse('proyecto:proyecto_lista')),
@@ -104,13 +104,13 @@ class ProyectoDetailView(PermissionRequiredMixin, DetailView):
 
 @login_required
 @permission_required('proyecto.change_proyecto', raise_exception=True, )
-def activar_espacio(request, id):
+def activar_proyecto(request, id):
     res = app_service.cambiar_estado(id, True, request)
     return JsonResponse(res, safe=False)
 
 @login_required
 @permission_required('proyecto.change_proyecto', raise_exception=True, )
-def desactivar_espacio(request, id):
+def desactivar_proyecto(request, id):
     res = app_service.cambiar_estado(id, False, request)
     return JsonResponse(res, safe=False)
 

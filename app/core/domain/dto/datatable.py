@@ -62,6 +62,12 @@ class DataTableParams():
     def get(self, key, default=None):
         return self.kwargs.get(key, default)
 
+    def get_bool(self, key, default=None):
+        value = self.get(key, default)
+        if value == '':
+            return default
+        return value
+
     def get_search_values(self):
         return self.search_value.split(' ')
 
