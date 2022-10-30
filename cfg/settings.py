@@ -47,7 +47,8 @@ LOGIN_URL= '/seguridad/accounts/login'
 # Application definition
 CUSTOM_INSTALLED_APPS = [
     'app.core.apps.CoreConfig',
-    'app.seguridad.apps.SeguridadConfig'
+    'app.seguridad.apps.SeguridadConfig',
+    'app.proyecto.apps.ProyectosConfig'
 ]
 
 LIB_INSTALLED_APPS = [

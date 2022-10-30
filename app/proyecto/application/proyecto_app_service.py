@@ -1,0 +1,2 @@
+class ProyectoAppService(object):
+    pass
