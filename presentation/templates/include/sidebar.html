@@ -1,6 +1,22 @@
 <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            {% if user.is_superuser or user.is_admin %}
+				<li class="nav-item proceso-bandeja-item">
+					<a href="{% url 'admin:index' %}" class="nav-link nav-toggle" target="_blank"> <i class="fas fa-user-secret"></i>
+						<span class="title">Administración</span>
+					</a>
+				</li>
+				<li class="nav-item proceso-bandeja-item">
+					<a href="{% url 'proyecto:proyecto_lista' %}" class="nav-link nav-toggle"> <i class="fas fa-th-large"></i>
+						<span class="title">Proyectos</span>
+						<span class="procesos-contador pull-right notification-label bg-secondary">
+							<!--{ get_numero_espacios_activos user }-->
+						</span>
+					</a>
+				</li>
+				{% endif %}
+
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <!--

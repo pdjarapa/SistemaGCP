@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}Lista espacios{% endblock %}
+{% block card-title %} Espacios de trabajo{% endblock %}
+
+{% block card-tools %}
+
+{% endblock %}
+
+{% block css %}
+    {% include "pugins/datatable/css.html" %}
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="tools">
+        <div class="pull-right">
+            {%  if perms.proyecto.add_proyecto %}
+            <a class="btn btn-default" href="{% url 'proyecto:proyecto_crear' %}">
+                <i class="fas fa-plus"></i> Nuevo
+            </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="form-group">
+            <label>Estado:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <select id="filtro_activo" class="form-control form-control-sm" style="width: 200px">
+                <option value="">--Todos--</option>
+                <option value="True">SI</option>
+                <option value="False">NO</option>
+            </select>
+        </div>
+    </div>
+    <span class="border-bottom"></span>
+
+    <table id="lista" class="lista table stripe hover dataTable">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Activo</th>
+                <th>Creado por</th>
+                <th>Creado el</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block js %}
+    {% load static %}
+    {% include "pugins/datatable/js.html" %}
+
+    <script type="text/javascript">
+        var url_editar = "{% url 'proyecto:proyecto_detalle' 0 %}";
+        var url_activar = "{% url 'proyecto:proyecto_activar' 0 %}";
+        var url_desactivar = "{% url 'proyecto:proyecto_desactivar' 0 %}";
+    </script>
+
+    <script src="{% static 'js/proyecto/lista.js' %}?v=1.1"></script>
+{% endblock %}

@@ -1,0 +1,65 @@
+<div class="card card-topline-aqua">
+    <div class="card-body no-padding height-9">
+        <div class="row">
+            <div class="profile-userpic">
+                <!--<img src="../assets/img/dp.jpg" class="img-responsive" alt="">-->
+            </div>
+        </div>
+        <div class="profile-usertitle">
+            <div class="profile-usertitle-name"><i class="fas fa-th-large"></i>  {{ espacio.nombre }}</div>
+            <div class="profile-usertitle-job"> Espacio de Trabajo </div>
+        </div>
+        <ul class="list-group list-group-unbordered">
+            <li class="list-group-item">
+                <b>Activo</b> <a class="pull-right">{% if espacio.activo %}Si{% else %}No{% endif %}</a>
+            </li>
+
+        </ul>
+        <!-- END SIDEBAR USER TITLE -->
+        <!-- SIDEBAR BUTTONS -->
+        <div class="profile-userbuttons">
+                {% if perms.proyecto.change_proyecto %}
+                    <a href="{% url 'proyecto:proyecto_editar' espacio.id %}"
+                       class="btn btn-default btn-sm btn-circle">
+                        <i class="fa fa fa-edit"></i> Editar
+                    </a>
+                    <a href="{% url 'proyecto:proyecto_lista' %}" class="btn btn-default btn-sm btn-circle">
+                        <i class="fa fa fa-arrow-left"></i> Regresar
+                    </a>
+                {% else %}
+                    <a href="{% url 'index' %}" class="btn btn-default btn-sm btn-circle">
+                        <i class="fa fa fa-arrow-left"></i> Regresar
+                    </a>
+                {% endif %}
+        </div>
+        <!-- END SIDEBAR BUTTONS -->
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-head card-topline-aqua">
+        <header>Descripción</header>
+    </div>
+    <div class="card-body no-padding height-9">
+        <div class="profile-desc">
+            {{ espacio.descripcion }}
+        </div>
+        <ul class="list-group list-group-unbordered">
+            <li class="list-group-item">
+                <b>Creado el</b>
+                <div class="profile-desc-item pull-right">{{ espacio.created_at }}</div>
+            </li>
+        </ul>
+        <div class="row list-separated profile-stat">
+            <div class="col-md-4 col-sm-4 col-6">
+                <div class="uppercase profile-stat-title"> {{ espacio.grupos.count }} </div>
+                <div class="uppercase profile-stat-text"> Grupos </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-6">
+                <div class="uppercase profile-stat-title"> {{ espacio.miembros.count }}</div>
+                <div class="uppercase profile-stat-text"> Admin </div>
+            </div>
+        </div>
+    </div>
+</div>

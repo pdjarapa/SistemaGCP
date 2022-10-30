@@ -58,7 +58,9 @@ LIB_INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'auditlog'
+    'auditlog',
+    'rest_framework',
+    'crispy_forms'
 ]
 
 INSTALLED_APPS = LIB_INSTALLED_APPS + CUSTOM_INSTALLED_APPS

@@ -24,4 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('seguridad/', include('app.seguridad.services.urls')),
+
+
+    path('', include('app.proyecto.services.mvc_urls')),
+    path('api/v1/', include('app.proyecto.services.api_urls')),
 ]
