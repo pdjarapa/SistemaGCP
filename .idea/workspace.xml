@@ -4,39 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="278472fe-6bf1-42bc-a504-174c3fecdd40" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/presentation/templates/home_old.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/logo-white.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/unl.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/arsha/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/arsha/js/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/arsha/vendor/aos/aos.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/arsha/vendor/jquery-easing/jquery.easing.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/SistemaGCP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SistemaGCP.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/cd50aa55-5d9b-4df5-8617-b7db3995bff9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/cd50aa55-5d9b-4df5-8617-b7db3995bff9.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="278472fe-6bf1-42bc-a504-174c3fecdd40" name="Changes" comment="Plantillas">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/core/presentation/templatetags/core_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/presentation/templatetags/core_tags.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/seguridad/application/notificacion_app_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/seguridad/application/notificacion_app_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/seguridad/application/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/seguridad/application/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/seguridad/application/usuario_app_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/seguridad/application/usuario_app_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/seguridad/domain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/seguridad/domain/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/seguridad/presentation/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/seguridad/presentation/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/seguridad/presentation/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/seguridad/presentation/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/seguridad/presentation/templates/autenticacion/iniciar_sesion.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/seguridad/presentation/templates/autenticacion/iniciar_sesion.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/seguridad/presentation/templates/autenticacion/iniciar_sesion_solicitante.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/seguridad/presentation/templates/autenticacion/iniciar_sesion_tipo_usuario.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/seguridad/presentation/templates/autenticacion/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/seguridad/presentation/templates/autenticacion/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/seguridad/presentation/templates/autenticacion/registro_solicitante.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/seguridad/presentation/views/views_autenticacion.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/seguridad/presentation/views/views_autenticacion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/seguridad/presentation/views/views_seguridad.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/seguridad/presentation/views/views_seguridad.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/seguridad/security/backends.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/seguridad/services/urls/autenticacion.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/seguridad/services/urls/autenticacion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/seguridad/services/urls/seguridad.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/seguridad/services/urls/seguridad.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cfg/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cfg/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/templates/principal_layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/templates/base_landscape.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,8 +111,23 @@
       <workItem from="1667075068269" duration="11000" />
       <workItem from="1667075174973" duration="8000" />
       <workItem from="1667075208428" duration="618000" />
-      <workItem from="1667076238024" duration="4516000" />
+      <workItem from="1667076238024" duration="5533000" />
     </task>
+    <task id="LOCAL-00001" summary="Plantillas">
+      <created>1667087142904</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1667087142904</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Plantillas">
+      <created>1667088032860</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1667088032860</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,5 +143,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Plantillas" />
+    <option name="LAST_COMMIT_MESSAGE" value="Plantillas" />
   </component>
 </project>
