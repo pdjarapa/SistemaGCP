@@ -1,5 +1,5 @@
 #Ignora recursos
-*/migrations/
+migrations/*
 __pycache__/
 
 #extensions to ignore
@@ -12,5 +12,5 @@ __pycache__/
 
 #directories to ignore
 *.vscode/
-.idea/*
+*.idea/
 .installed.cfg
