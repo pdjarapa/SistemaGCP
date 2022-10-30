@@ -94,7 +94,7 @@ function default_options_datatable(){
                 var html =
                 '<div class="dropdown show dropdown-espacio" data-id="'+ row.id +'" data-activo="' + row.activo + '"> \
                   <a class="btn btn-link btn-xs dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> \
-                    <i class="fas fa-ellipsis-h"></i> \
+                    <i class="fas fa-th-list"></i> \
                   </a> \
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"> \
                     <a class="dropdown-item item-espacio-activar" href="javascript:void(0);">' + (row.activo ? 'Desactivar' : 'Activar') + '</a> \
@@ -104,9 +104,6 @@ function default_options_datatable(){
             }}
 
         ],
-        initComplete: function (settings, json) {
-            $('#loader').hide();
-        },
         "stateSave": true,
         fnStateSaveParams: function(oSettings, oData){
             oData.filtro_activo = $('#filtro_activo').val();

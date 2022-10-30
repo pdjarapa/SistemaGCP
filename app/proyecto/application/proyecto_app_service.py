@@ -40,6 +40,9 @@ class ProyectoAppService(object):
 
         #estado, respuesta = RecaudacionSecService.usuario_acceso_empresa(params.request.user, empresa)
         #if estado:
+        #import time
+        #time.sleep(3)
+
         params = DataTableParams(filter_values)
 
         queryset = Proyecto.objects
@@ -70,4 +73,14 @@ class ProyectoAppService(object):
         ]
 
         return params.result(data)
+
+
+    def cambiar_estado(self, espacio_id, estado, request):
+        proyecto = Proyecto.objects.get(id=espacio_id)
+
+        proyecto.activo = estado
+        proyecto.save()
+        return {'status': 'ok', 'message': '¡Se cambió corretamente el estado!'}
+
+
 

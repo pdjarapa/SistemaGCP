@@ -65,6 +65,7 @@ LIB_INSTALLED_APPS = [
 
 INSTALLED_APPS = LIB_INSTALLED_APPS + CUSTOM_INSTALLED_APPS
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -74,6 +75,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'app.seguridad.security.middleware.RequestMiddleware',
+    'app.seguridad.security.middleware.RemoteUserMiddleware',
+    'auditlog.middleware.AuditlogMiddleware',
 ]
 
 ROOT_URLCONF = 'cfg.urls'
@@ -152,13 +157,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+LANGUAGE_CODE = 'es-ec'
+TIME_ZONE = 'America/Guayaquil'
 USE_I18N = True
-
-USE_TZ = True
+#USE_TZ = True
 
 
 

@@ -37,4 +37,4 @@ class ProyectoForm(forms.ModelForm):
         )
 
     class Media:
-        js = ('js/espacio/editar.js',)
+        js = ('js/proyecto/editar.js',)
