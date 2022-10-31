@@ -82,6 +82,8 @@ class Paso(AuditModel):
     precondicion = models.TextField(max_length=250, null=True, blank=True)
     postcondicion = models.TextField(max_length=250, null=True, blank=True)
 
+    caso_prueba = models.ForeignKey(CasoPrueba, on_delete=models.CASCADE, related_name='pasos')
+
     class Meta:
         ordering = ('numero',)
 
