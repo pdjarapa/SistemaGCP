@@ -69,7 +69,21 @@ class CasoPrueba(AuditModel):
 
     class Meta:
         ordering = ('codigo',)
-        unique_together = ('codigo',)
+        constraints = [models.UniqueConstraint(fields=['codigo', 'proyecto'], name='caso_prueba_codigo_proyecto_unique')]
 
     def __str__(self):
         return '%s' % (self.codigo)
+
+
+class Paso(AuditModel):
+    numero = models.IntegerField(default=0)
+    accion = models.TextField(max_length=250)
+    resultado_esperado = models.TextField(max_length=250, null=True, blank=True)
+    precondicion = models.TextField(max_length=250, null=True, blank=True)
+    postcondicion = models.TextField(max_length=250, null=True, blank=True)
+
+    class Meta:
+        ordering = ('numero',)
+
+    def __str__(self):
+        return '%s.- %s' % (self.numero, self.accion)
