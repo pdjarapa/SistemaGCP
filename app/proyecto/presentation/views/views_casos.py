@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -26,15 +27,28 @@ class CasoPruebaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateV
     success_message = "Estimado usuario, se ha registrado satisfactoriamente la información."
 
     def get_success_url(self):
-        return reverse('proyecto:proyecto_lista')
+        return reverse('proyecto:proyecto_detalle', args=[self.proyecto.id])
+
+    def form_valid(self, form):
+        self.proyecto = get_object_or_404(Proyecto, id=self.kwargs['proyecto_id'])
+        form.instance.proyecto = self.proyecto
+
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
+        self.proyecto = get_object_or_404(Proyecto, id=self.kwargs['proyecto_id'])
+        print('self.proyecto', self.proyecto)
+
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Crear proyecto'
+
+        context['proyecto'] = self.proyecto
+        context['title'] = 'Crear caso prueba'
         context['breadcrum'] = [
             ('Proyectos', reverse('proyecto:proyecto_lista')),
-            ('Nuevo', None)
+            ('Detalle', None),
+            ('Nuevo caso prueba', None)
         ]
+
         return context
 
 class CasoPruebaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):

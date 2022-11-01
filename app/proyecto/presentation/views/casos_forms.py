@@ -10,10 +10,11 @@ from app.proyecto.domain.models import CasoPrueba, Proyecto
 class CasosForm(forms.ModelForm):
     class Meta:
         model = CasoPrueba
-        fields=('nombre', 'descripcion')
+        fields=('codigo', 'nombre', 'descripcion')
         widgets = {
-            'nombre': forms.TextInput(attrs={'type': 'text', 'placeholder': 'Ejemplo: Dirección de Tecnologías de Información'}),
-            'descripcion': forms.TextInput(attrs={'type': 'text', 'placeholder': 'Ejemplo: DTI de la Universidad Nacional de Loja'}),
+            'codigo': forms.TextInput(attrs={'type': 'text', 'placeholder': ''}),
+            'nombre': forms.TextInput(attrs={'type': 'text', 'placeholder': ''}),
+            'descripcion': forms.TextInput(attrs={'type': 'text', 'placeholder': ''}),
         }
         help_texts = {
             'descripcion': 'Descripción del espacio de trabajo'
@@ -26,9 +27,9 @@ class CasosForm(forms.ModelForm):
         self.helper.form_class = 'custom-validate'
         self.helper.form_id = 'formEditar'
         self.helper.layout = Layout(
+            'codigo',
             'nombre',
             'descripcion',
-            'activo',
             ButtonHolder(
                 HTML(
                     '<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar </button>')
