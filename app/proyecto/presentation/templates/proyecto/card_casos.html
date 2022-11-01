@@ -7,7 +7,7 @@
         <h3 class="card-title">Administrar casos de prueba</h3>
         <div class="card-tools">
             {% if perms.proyecto.add_casoprueba %}
-            <a href="{% url 'proyecto:casoprueba_lista' proyecto.id %}" class="btn btn-primary">
+            <a href="{% url 'proyecto:casoprueba_crear' proyecto.id %}" class="btn btn-primary">
                 <i class="fas fa-users"></i> Nuevo
             </a>
             {% endif %}
@@ -28,7 +28,7 @@
         </div>
         <table id="dt-casos" class="table" data-id="{{ proyecto.id }}"
                data-url="{% url 'proyecto:casoprueba_lista' proyecto.id %}"
-               data-url_detalle="{% url 'proyecto:proyecto_detalle' 0 %}"
+               data-url_detalle="{% url 'proyecto:casoprueba_editar' 0 %}"
         >
             <thead>
                 <tr>
