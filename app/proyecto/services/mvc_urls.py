@@ -14,5 +14,5 @@ urlpatterns = [
 
     path('caso_prueba/lista/<int:proyecto_id>', views_casoslist.CasoPruebaListView.as_view(), name='casoprueba_lista'),
     path('caso_prueba/crear/<int:proyecto_id>', views_casos.CasoPruebaCreateView.as_view(), name='casoprueba_crear'),
-    path('caso_prueba/editar/<int:id>', views_casos.CasoPruebaUpdateView.as_view(), name='casoprueba_editar'),
+    path('caso_prueba/editar/<int:pk>', views_casos.CasoPruebaUpdateView.as_view(), name='casoprueba_editar'),
 ]

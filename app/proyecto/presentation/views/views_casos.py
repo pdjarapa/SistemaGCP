@@ -41,7 +41,7 @@ class CasoPruebaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateV
 
         context = super().get_context_data(**kwargs)
 
-        context['proyecto'] = self.proyecto
+        context['casoprueba'] = self.proyecto
         context['title'] = 'Crear caso prueba'
         context['breadcrum'] = [
             ('Proyectos', reverse('proyecto:proyecto_lista')),
@@ -53,17 +53,24 @@ class CasoPruebaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateV
 
 class CasoPruebaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = CasoPrueba
+    context_object_name = 'casoprueba'
     template_name = 'casoprueba/crear.html'
     permission_required = 'proyecto.change_casoprueba'
     form_class = CasosForm
     success_message = "Estimado usuario, se ha registrado satisfactoriamente la información."
 
+    def form_valid(self, form):
+        self.proyecto = form.instance.proyecto
+        return super().form_valid(form)
+
     def get_success_url(self):
-        return reverse('proyecto:proyecto_lista')
+        return reverse('proyecto:proyecto_detalle', args=[self.proyecto.id])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        proyecto = self.get_object()
+        casoprueba = self.get_object()
+        proyecto = casoprueba.proyecto
+        context['proyecto'] = proyecto
         context['title'] = 'Editar proyecto'
         context['breadcrum'] = [
             ('Proyectos', reverse('proyecto:proyecto_lista')),
@@ -80,7 +87,7 @@ class CasoPruebaDetailView(PermissionRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        proyecto = self.get_object()
+        casoprueba = self.get_object()
         context['title'] = 'Detalle del proyecto'
         context['breadcrum'] = [
             ('Proyectos', reverse('proyecto:proyecto_lista')),
