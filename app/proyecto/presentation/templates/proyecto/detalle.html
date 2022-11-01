@@ -15,11 +15,15 @@
                 {% include 'proyecto/card_detalle.html' %}
             </div>
             <!-- END BEGIN PROFILE SIDEBAR -->
+            <div class="profile-sidebar">
+                {% include 'proyecto/card_casos.html' %}
+            </div>
         </div>
     </div>
 {% endblock contenido %}
 
 
 {% block js %}
+    {% include 'pugins/datatable/js.html' %}
     <script src="{% static 'js/proyecto/detalle.js' %}?v=1.0"></script>
 {% endblock %}
