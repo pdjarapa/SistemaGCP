@@ -12,6 +12,7 @@ class CasoPruebaAppService(object):
 
         # Consulta
         proyecto_id = dtable.get('proyecto_id')
+        print('proyecto_id',proyecto_id )
         qfilter = CasoPrueba.objects.filter(proyecto__id=proyecto_id)\
             #.annotate(tiempo_reconocido=Sum('asistencias__tiempo_reconocido', filter=Q(asistencias__estado=Asistencia.ESTADO_ACTIVO)))
 
@@ -37,9 +38,10 @@ class CasoPruebaAppService(object):
 
         # Datatable - Inicializa items
         data = [
-            {'id': it.get('id'),
-             'codigo': it.nombre,
+            {'id': it.id,
+             'codigo': it.codigo,
              'nombre': it.nombre,
+             'descripcion': it.descripcion,
              }
             for it in dtable.init_items(qfilter)
         ]

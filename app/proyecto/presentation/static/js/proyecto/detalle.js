@@ -42,7 +42,7 @@ $(document).ready(function () {
 function options_datatable_grupos(){
     var url_grupos = $('#dt-casos').data('url');
     var url_detalle = $('#dt-casos').data('url_detalle');
-    var espacio_id = $('#dt-casos').data('id');
+    var proyecto_id = $('#dt-casos').data('id');
 
     return {
         "order": [[0, "desc"]],
@@ -57,7 +57,7 @@ function options_datatable_grupos(){
             url: url_grupos,
             type: 'POST',
             data: function ( d ) {
-                d.espacio_id = espacio_id;
+                d.proyecto_id = proyecto_id;
                 d.filtro_activo = $('#filtro_caso_activo').val();
             },
             //dataSrc: "",
@@ -74,6 +74,7 @@ function options_datatable_grupos(){
             }
         },
         columns: [
+            {"data": "codigo"},
             {"data": "nombre"},
             {"data": "descripcion"},
             {"data": "id"},
@@ -92,8 +93,10 @@ function options_datatable_grupos(){
             {targets: [1], render: function (data, type, row) {
                 return data;
             }},
-
-            {targets: [5], 'class': "text-right", render: function (data, type, row) {
+            {targets: [2], render: function (data, type, row) {
+                return data;
+            }},
+            {targets: [3], 'class': "text-right", render: function (data, type, row) {
                 var html =
                 '<div class="dropdown show dropdown-grupo" data-id="'+ row.id +'" data-activo="' + row.activo + '"> \
                   <a class="btn btn-link btn-xs dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> \
