@@ -4,7 +4,7 @@
 {% if perms.proyecto.view_casoprueba %}
 <div class="card">
     <div class="card-header">
-        <header>Administrar casos de prueba</header>
+        <h3 class="card-title">Administrar casos de prueba</h3>
         <div class="card-tools">
             {% if perms.proyecto.add_casoprueba %}
             <a href="{% url 'proyecto:casoprueba_lista' proyecto.id %}" class="btn btn-primary">
