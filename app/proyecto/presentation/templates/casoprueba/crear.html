@@ -11,7 +11,7 @@
     <div class="card card-outline card-primary">
         <div class="card-header">
             <h3 class="card-title">
-                Datos generales: {{ proyecto.id }}
+                Datos generales
             </h3>
             <div class="card-tools">
                 <a type="button" class="btn btn-tool btn-default" href="{% if proyecto %}{% url 'proyecto:proyecto_detalle' proyecto.id %}{% else %}{% url 'proyecto:proyecto_lista'%}{% endif %}">

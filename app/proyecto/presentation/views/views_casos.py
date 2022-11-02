@@ -71,7 +71,7 @@ class CasoPruebaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateV
         casoprueba = self.get_object()
         proyecto = casoprueba.proyecto
         context['proyecto'] = proyecto
-        context['title'] = 'Editar proyecto'
+        context['title'] = 'Editar caso de prueba'
         context['breadcrum'] = [
             ('Proyectos', reverse('proyecto:proyecto_lista')),
             ("Detalle", reverse('proyecto:proyecto_detalle', args=[proyecto.id])),

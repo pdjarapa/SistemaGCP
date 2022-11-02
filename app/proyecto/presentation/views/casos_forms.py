@@ -14,7 +14,7 @@ class CasosForm(forms.ModelForm):
         widgets = {
             'codigo': forms.TextInput(attrs={'type': 'text', 'placeholder': ''}),
             'nombre': forms.TextInput(attrs={'type': 'text', 'placeholder': ''}),
-            'descripcion': forms.TextInput(attrs={'type': 'text', 'placeholder': ''}),
+            'descripcion': forms.Textarea(attrs={'rows': 3, 'placeholder': ''}),
             'precondicion': forms.Textarea(attrs={'rows':3}),
             'pasos': forms.Textarea(attrs={'rows':3}),
             'resultado_esperado': forms.Textarea(attrs={'rows':3}),
@@ -37,17 +37,21 @@ class CasosForm(forms.ModelForm):
         self.helper.form_class = 'custom-validate'
         self.helper.form_id = 'formEditar'
         self.helper.layout = Layout(
-            'codigo',
-            'nombre',
+            Div(
+                Div('codigo', css_class='col-md-2'),
+                Div('nombre', css_class='col-md-10'),
+                css_class='row'
+            ),
             'descripcion',
             'precondicion',
             'pasos',
             'resultado_esperado',
-            'tipo',
-            'evaluacion',
-            'variedad',
-            'prioridad',
-            'estado',
+            Div(
+                Div('tipo', 'estado', css_class="col-md-4"),
+                Div('prioridad', 'evaluacion', css_class="col-md-4"),
+                Div('variedad', css_class="col-md-4"),
+                css_class='row'
+            ),
             'postcondicion',
             'observacion',
             ButtonHolder(
