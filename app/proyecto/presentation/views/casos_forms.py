@@ -10,11 +10,21 @@ from app.proyecto.domain.models import CasoPrueba, Proyecto
 class CasosForm(forms.ModelForm):
     class Meta:
         model = CasoPrueba
-        fields=('codigo', 'nombre', 'descripcion')
+        fields=('codigo', 'nombre', 'descripcion','precondicion','pasos','resultado_esperado','tipo','variedad','prioridad','estado','evaluacion','postcondicion','observacion')
         widgets = {
             'codigo': forms.TextInput(attrs={'type': 'text', 'placeholder': ''}),
             'nombre': forms.TextInput(attrs={'type': 'text', 'placeholder': ''}),
             'descripcion': forms.TextInput(attrs={'type': 'text', 'placeholder': ''}),
+            'precondicion': forms.Textarea(attrs={'rows':3}),
+            'pasos': forms.Textarea(attrs={'rows':3}),
+            'resultado_esperado': forms.Textarea(attrs={'rows':3}),
+            'tipo':forms.Select(),
+            'evaluacion':forms.Select(),
+            'variedad':forms.Select(),
+            'prioridad':forms.Select(),
+            'estado':forms.Select(),
+            'postcondicion': forms.TextInput(attrs={'type': 'text', 'placeholder': ''}),
+            'observacion': forms.Textarea(attrs={'rows':3}),
         }
         help_texts = {
             'descripcion': 'Descripción del espacio de trabajo'
@@ -30,6 +40,16 @@ class CasosForm(forms.ModelForm):
             'codigo',
             'nombre',
             'descripcion',
+            'precondicion',
+            'pasos',
+            'resultado_esperado',
+            'tipo',
+            'evaluacion',
+            'variedad',
+            'prioridad',
+            'estado',
+            'postcondicion',
+            'observacion',
             ButtonHolder(
                 HTML(
                     '<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar </button>')

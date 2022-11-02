@@ -55,6 +55,7 @@ class CasoPrueba(AuditModel):
     nombre = models.CharField(max_length=80)
     descripcion = models.TextField(max_length=250, null=True, blank=True)
     precondicion = models.TextField(max_length=250, null=True, blank=True)
+    pasos = models.TextField(max_length=250, null=True, blank=True)
     resultado_esperado = models.TextField(max_length=250, null=True, blank=True)
     postcondicion = models.TextField(max_length=250, null=True, blank=True)
     observacion = models.TextField(max_length=250, null=True, blank=True)
@@ -82,7 +83,7 @@ class Paso(AuditModel):
     precondicion = models.TextField(max_length=250, null=True, blank=True)
     postcondicion = models.TextField(max_length=250, null=True, blank=True)
 
-    caso_prueba = models.ForeignKey(CasoPrueba, on_delete=models.CASCADE, related_name='pasos')
+    #caso_prueba = models.ForeignKey(CasoPrueba, on_delete=models.CASCADE, related_name='pasos')
 
     class Meta:
         ordering = ('numero',)
