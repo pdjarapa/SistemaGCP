@@ -76,17 +76,12 @@ class CasoPrueba(AuditModel):
         return '%s' % (self.codigo)
 
 
-class Paso(AuditModel):
-    numero = models.IntegerField(default=0)
-    accion = models.TextField(max_length=250)
-    resultado_esperado = models.TextField(max_length=250, null=True, blank=True)
-    precondicion = models.TextField(max_length=250, null=True, blank=True)
-    postcondicion = models.TextField(max_length=250, null=True, blank=True)
-
-    #caso_prueba = models.ForeignKey(CasoPrueba, on_delete=models.CASCADE, related_name='pasos')
+class CicloPrueba(AuditModel):
+    nombre = models.TextField(max_length=80)
+    decripcion = models.TextField(max_length=250, null=True, blank=True)
 
     class Meta:
-        ordering = ('numero',)
+        ordering = ('nombre',)
 
     def __str__(self):
-        return '%s.- %s' % (self.numero, self.accion)
+        return '%s' % (self.nombre)
