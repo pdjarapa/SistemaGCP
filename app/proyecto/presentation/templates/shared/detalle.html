@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block block_proyecto %}
+    <nav class="mt-2 user-panel">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item ">
+                <a href="javascript:void(0);">
+                <i class="fas fa-project-diagram"></i>Proyecto: {{ proyecto.nombre }}
+                </a>
+            </li>
+            <li class="nav-item proceso-bandeja-item">
+                <a href="{% url 'proyecto:proyecto_detalle' proyecto.id %}" class="nav-link nav-toggle"> <i class="fas fa-desktop"></i>
+                    <span class="title">Detalle</span>
+                    <span class="procesos-contador pull-right notification-label bg-secondary">
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item proceso-bandeja-item">
+                <a href="{% url 'proyecto:cicloprueba_lista' proyecto.id %}" class="nav-link nav-toggle"> <i class="fas fa-circle-notch"></i>
+                    <span class="title">Ciclos de prueba</span>
+                    <span class="procesos-contador pull-right notification-label bg-secondary">
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item proceso-bandeja-item">
+                <a href="{% url 'proyecto:casoprueba_lista' proyecto.id %}" class="nav-link nav-toggle"> <i class="fas fa-cash-register"></i>
+                    <span class="title">Casos de prueba</span>
+                    <span class="procesos-contador pull-right notification-label bg-secondary">
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}

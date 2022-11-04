@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'shared/detalle.html' %}
 {% load static %}
 
 {% block titulo %}{{ title }}{% endblock %}
@@ -15,13 +15,10 @@
                 {% include 'proyecto/card_detalle.html' %}
             </div>
             <!-- END BEGIN PROFILE SIDEBAR -->
-            <div class="profile-sidebar">
-                {% include 'proyecto/card_casos.html' %}
-            </div>
+
         </div>
     </div>
 {% endblock contenido %}
-
 
 {% block js %}
     {% include 'pugins/datatable/js.html' %}

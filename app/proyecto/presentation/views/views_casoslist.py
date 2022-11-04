@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -19,7 +20,7 @@ app_service = CasoPruebaAppService()
 
 class CasoPruebaListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Proyecto
-    template_name = 'proyecto/lista.html'
+    template_name = 'casoprueba/lista.html'
     permission_required = 'proyecto.view_casoprueba'
 
     @method_decorator(csrf_exempt)
@@ -39,8 +40,17 @@ class CasoPruebaListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
         data = app_service.get_datatable(request.POST)
         return JsonResponse(data, safe=False)
 
-    #def get_context_data(self, **kwargs):
-    #    context = super().get_context_data(**kwargs)
-    #    context['title'] = 'Lista de proyectos'
-    #    context['breadcrum'] = [('Proyectos', reverse('proyecto:proyecto_lista'))]
-    #    return context
+    def get_context_data(self, **kwargs):
+        self.proyecto = get_object_or_404(Proyecto, id=self.kwargs['proyecto_id'])
+
+        context = super().get_context_data(**kwargs)
+
+        context['proyecto'] = self.proyecto
+        context['title'] = 'Casos de prueba'
+        context['breadcrum'] = [
+            ('Proyectos', reverse('proyecto:proyecto_lista')),
+            ('Detalle', None),
+            ('Ciclos de prueba', None),
+        ]
+
+        return context

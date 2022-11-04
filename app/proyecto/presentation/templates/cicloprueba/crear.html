@@ -1,0 +1,43 @@
+{% extends 'edit_layout.html' %}
+{% load crispy_forms_tags %}
+{% load core_tags %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'css/proyecto/editar.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block contenido %}
+    <div class="card card-outline card-primary">
+        <div class="card-header">
+            <h3 class="card-title">
+                Datos generales
+            </h3>
+            <div class="card-tools">
+                <a type="button" class="btn btn-tool btn-default" href="{% if proyecto %}{% url 'proyecto:proyecto_detalle' proyecto.id %}{% else %}{% url 'proyecto:proyecto_lista'%}{% endif %}">
+                    <i class="fa fa-arrow-left "></i> Regresar
+                </a>
+            </div>
+        </div>
+        <div class="card-body ">
+            {% block formulario %}
+                {% if form.helper %}
+                    {% crispy form %}
+                {% else %}
+                    <form method="post" class="auto-validate" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+                    </form>
+                {% endif %}
+            {% endblock %}
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block js %}
+    {{ block.super }}
+    {{ form.media }}
+{% endblock %}

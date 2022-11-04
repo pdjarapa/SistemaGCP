@@ -1,5 +1,5 @@
 from django.urls import path
-from app.proyecto.presentation.views import views_casos, views_proyecto
+from app.proyecto.presentation.views import views_casos, views_proyecto, views_ciclos
 from app.proyecto.presentation.views import views_casoslist
 
 app_name = 'proyecto'
@@ -15,4 +15,8 @@ urlpatterns = [
     path('caso_prueba/lista/<int:proyecto_id>', views_casoslist.CasoPruebaListView.as_view(), name='casoprueba_lista'),
     path('caso_prueba/crear/<int:proyecto_id>', views_casos.CasoPruebaCreateView.as_view(), name='casoprueba_crear'),
     path('caso_prueba/editar/<int:pk>', views_casos.CasoPruebaUpdateView.as_view(), name='casoprueba_editar'),
+
+    path('ciclo_prueba/lista/<int:proyecto_id>', views_ciclos.CicloPruebaListView.as_view(), name='cicloprueba_lista'),
+    path('ciclo_prueba/crear/<int:proyecto_id>', views_ciclos.CicloPruebaCreateView.as_view(), name='cicloprueba_crear'),
+    path('ciclo_prueba/editar/<int:pk>', views_ciclos.CicloPruebaUpdateView.as_view(), name='cicloprueba_editar'),
 ]

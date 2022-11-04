@@ -78,7 +78,9 @@ class CasoPrueba(AuditModel):
 
 class CicloPrueba(AuditModel):
     nombre = models.TextField(max_length=80)
-    decripcion = models.TextField(max_length=250, null=True, blank=True)
+    descripcion = models.TextField(max_length=250, null=True, blank=True)
+
+    proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE, related_name='ciclos_prueba')
 
     class Meta:
         ordering = ('nombre',)
