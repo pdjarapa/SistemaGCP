@@ -51,7 +51,10 @@ function options_datatable_casos(){
         columns: [
             {"data": "codigo"},
             {"data": "nombre"},
-            {"data": "descripcion"},
+            {"data": "tipo"},
+            {"data": "variedad"},
+            {"data": "prioridad"},
+            {'data': "estado"},
             {"data": "id"},
         ],
         columnDefs: [
@@ -61,8 +64,6 @@ function options_datatable_casos(){
                 class: '',
             },
             {targets: [0], render: function (data, type, row) {
-                var url =  url_detalle + row.id;
-                return $.validator.format('<a href="{0}"><i class="fas fa-users"></i> {1}</a>', url, data);
                 return data;
             }},
             {targets: [1], render: function (data, type, row) {
@@ -71,8 +72,17 @@ function options_datatable_casos(){
             {targets: [2], render: function (data, type, row) {
                 return data;
             }},
-            {targets: [3], 'class': "text-right", render: function (data, type, row) {
-                var html =
+            {targets: [3], render: function (data, type, row) {
+                return data;
+            }},
+            {targets: [4], render: function (data, type, row) {
+                return data;
+            }},
+            {targets: [5], render: function (data, type, row) {
+                return data;
+            }},
+            {targets: [6], 'class': "text-right", render: function (data, type, row) {
+                /*var html =
                 '<div class="dropdown show dropdown-grupo" data-id="'+ row.id +'" data-activo="' + row.activo + '"> \
                   <a class="btn btn-link btn-xs dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> \
                     <i class="fas fa-ellipsis-h"></i> \
@@ -81,7 +91,10 @@ function options_datatable_casos(){
                     <a class="dropdown-item item-grupo-activar" href="javascript:void(0);">' + (row.activo ? 'Desactivar' : 'Activar') + '</a> \
                   </div> \
                 </div>';
-                return html;
+                return html;*/
+                var url =  url_detalle + row.id;
+                return $.validator.format('<a href="{0}"><i class="fas fa-edit"></i> {1}</a>', url, 'Editar');
+
             }}
 
         ],

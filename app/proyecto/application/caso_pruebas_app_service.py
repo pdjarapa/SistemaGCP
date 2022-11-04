@@ -1,5 +1,6 @@
 from django.db.models import Q
 
+from app.core.application.BaseAppService import BaseAppService
 from app.core.domain.dto.datatable import DataTableParams
 from app.proyecto.domain.models import Proyecto, CasoPrueba
 from app.proyecto.services.serializers import ProyectoSerializer
@@ -42,6 +43,11 @@ class CasoPruebaAppService(object):
              'codigo': it.codigo,
              'nombre': it.nombre,
              'descripcion': it.descripcion,
+             'tipo': BaseAppService.get_choice_display(CasoPrueba.CHOICE_TIPO, it.tipo),
+             'variedad': BaseAppService.get_choice_display(CasoPrueba.CHOICE_VARIEDAD, it.variedad),
+             'prioridad': BaseAppService.get_choice_display(CasoPrueba.CHOICE_PRIORIDAD, it.prioridad),
+             'evaluacion': BaseAppService.get_choice_display(CasoPrueba.CHOICE_EVALUACION, it.evaluacion),
+             'estado': BaseAppService.get_choice_display(CasoPrueba.CHOICE_ESTADO, it.estado),
              }
             for it in dtable.init_items(qfilter)
         ]
