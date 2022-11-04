@@ -18,15 +18,15 @@
                 </a>
             </li>
             <li class="nav-item proceso-bandeja-item">
-                <a href="{% url 'proyecto:cicloprueba_lista' proyecto.id %}" class="nav-link nav-toggle"> <i class="fas fa-circle-notch"></i>
-                    <span class="title">Ciclos de prueba ({{ proyecto.ciclos_prueba.count }})</span>
+                <a href="{% url 'proyecto:casoprueba_lista' proyecto.id %}" class="nav-link nav-toggle"> <i class="fas fa-cash-register"></i>
+                    <span class="title">Casos de prueba ({{ proyecto.casos_prueba.count }})</span>
                     <span class="procesos-contador pull-right notification-label bg-secondary">
                     </span>
                 </a>
             </li>
             <li class="nav-item proceso-bandeja-item">
-                <a href="{% url 'proyecto:casoprueba_lista' proyecto.id %}" class="nav-link nav-toggle"> <i class="fas fa-cash-register"></i>
-                    <span class="title">Casos de prueba ({{ proyecto.casos_prueba.count }})</span>
+                <a href="{% url 'proyecto:cicloprueba_lista' proyecto.id %}" class="nav-link nav-toggle"> <i class="fas fa-circle-notch"></i>
+                    <span class="title">Ciclos de prueba ({{ proyecto.ciclos_prueba.count }})</span>
                     <span class="procesos-contador pull-right notification-label bg-secondary">
                     </span>
                 </a>
