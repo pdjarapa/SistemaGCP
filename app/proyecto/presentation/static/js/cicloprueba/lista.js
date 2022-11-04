@@ -19,6 +19,7 @@ function options_datatable_ciclos(){
     var url_grupos = $('#dt-ciclos').data('url');
     var url_detalle = $('#dt-ciclos').data('url_detalle');
     var proyecto_id = $('#dt-ciclos').data('id');
+    var url_ejecutar = $('#dt-ciclos').data('url_ejecutar');
 
     return {
         "order": [[0, "desc"]],
@@ -61,23 +62,17 @@ function options_datatable_ciclos(){
                 class: '',
             },
             {targets: [0], render: function (data, type, row) {
-                var url =  url_detalle + row.id;
-                return $.validator.format('<a href="{0}"><i class="fas fa-users"></i> {1}</a>', url, data);
                 return data;
             }},
             {targets: [1], render: function (data, type, row) {
                 return data;
             }},
-            {targets: [3], 'class': "text-right", render: function (data, type, row) {
-                var html =
-                '<div class="dropdown show dropdown-grupo" data-id="'+ row.id +'" data-activo="' + row.activo + '"> \
-                  <a class="btn btn-link btn-xs dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> \
-                    <i class="fas fa-ellipsis-h"></i> \
-                  </a> \
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"> \
-                    <a class="dropdown-item item-ciclo-ejecutar" href="javascript:void(0);">' + ('Ejecutar') + '</a> \
-                  </div> \
-                </div>';
+            {targets: [2], 'class': "text-right", render: function (data, type, row) {
+                var url_edit =  url_detalle + row.id;
+                var url_exec = url_ejecutar + row.id;
+                var html = '';
+                html += $.validator.format('<a href="{0}"><i class="fas fa-pen"></i> {1}</a> | ', url_edit, 'Editar');
+                html += $.validator.format('<a href="{0}"><i class="fas fa-running"></i> {1}</a>', url_exec, 'Ejecutar');
                 return html;
             }}
 
@@ -95,13 +90,5 @@ function options_datatable_ciclos(){
 };
 
 function init_actions(){
-    $(document).on('click', '.item-ciclo-ejecutar', function(e){
 
-        var div = $(this).parents('div.dropdown-grupo');
-
-        var id = $(div).data('id');
-        var url_ejecutar = $('#dt-ciclos').data('url_ejecutar');
-        console.log(url_ejecutar);
-        $(this).attr('href', url_ejecutar + id);
-    });
 }

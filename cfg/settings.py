@@ -22,7 +22,7 @@ MEDIA_URL = '/media/'
 
 SYSTEM_NAME = "Sistema de Gestión de Casos de Prueba"
 SYSTEM_SNAME = "Sistema GCP"
-SYSTEM_ALIAS = "SGCP"
+SYSTEM_ALIAS = "GCP"
 
 # Configuración n-layer architecture
 CUSTOM_MODELS_MODULE = "domain.models"
