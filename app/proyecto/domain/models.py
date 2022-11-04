@@ -87,3 +87,11 @@ class CicloPrueba(AuditModel):
 
     def __str__(self):
         return '%s' % (self.nombre)
+
+
+class EjecucionPrueba(AuditModel):
+    ciclo_prueba = models.ForeignKey(CicloPrueba, on_delete=models.CASCADE, related_name='pruebas_ejecutadas')
+    caso_prueba = models.ForeignKey(CasoPrueba, on_delete=models.CASCADE, related_name='pruebas_ejecutadas')
+    estado = models.CharField(max_length=1, choices=CasoPrueba.CHOICE_ESTADO, default=CasoPrueba.ESTADO_BORRADOR)
+    comentario = models.TextField(max_length=250, null=True, blank=True)
+    evidencia = models.ImageField(upload_to='evidencia/%Y/%m/%d/')
