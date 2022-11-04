@@ -87,7 +87,9 @@ class CicloPruebaAppService(BaseAppService):
              'caso_prueba__codigo': it.caso_prueba.codigo,
              'caso_prueba__nombre': it.caso_prueba.nombre,
              'caso_prueba__descripcion': it.caso_prueba.descripcion,
-             'estado': CicloPruebaAppService.get_str_estado_caso_prueba(it.estado)
+             'comentario': it.comentario,
+             'estado': CicloPruebaAppService.get_str_estado_caso_prueba(it.estado),
+             'evidencia': it.evidencia.url if it.evidencia else ''
              }
             for it in dtable.init_items(qfilter)
         ]
