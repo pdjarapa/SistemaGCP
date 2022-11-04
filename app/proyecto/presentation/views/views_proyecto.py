@@ -53,7 +53,7 @@ class ProyectoCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateVie
     success_message = "Estimado usuario, se ha registrado satisfactoriamente la información."
 
     def get_success_url(self):
-        return reverse('proyecto:proyecto_lista')
+        return reverse('proyecto:proyecto_detalle', args=[self.object.id])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -72,7 +72,7 @@ class ProyectoUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateVie
     success_message = "Estimado usuario, se ha registrado satisfactoriamente la información."
 
     def get_success_url(self):
-        return reverse('proyecto:proyecto_lista')
+        return reverse('proyecto:proyecto_detalle', args=[self.object.id])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
