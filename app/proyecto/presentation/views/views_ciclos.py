@@ -66,7 +66,7 @@ class CicloPruebaCreateView(PermissionRequiredMixin, SuccessMessageMixin, Create
     success_message = "Estimado usuario, se ha registrado satisfactoriamente la información."
 
     def get_success_url(self):
-        return reverse('proyecto:proyecto_detalle', args=[self.proyecto.id])
+        return reverse('proyecto:cicloprueba_lista', args=[self.proyecto.id])
 
     def form_valid(self, form):
         self.proyecto = get_object_or_404(Proyecto, id=self.kwargs['proyecto_id'])
@@ -103,7 +103,7 @@ class CicloPruebaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, Update
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('proyecto:proyecto_detalle', args=[self.proyecto.id])
+        return reverse('proyecto:cicloprueba_lista', args=[self.proyecto.id])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

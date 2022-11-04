@@ -11,13 +11,48 @@ from django.views.generic import CreateView
 from django.views.generic import ListView, DetailView
 from django.views.generic import UpdateView
 
-
-from app.proyecto.application.proyecto_app_service import ProyectoAppService
+from app.proyecto.application.caso_pruebas_app_service import CasoPruebaAppService
 from app.proyecto.domain.models import CasoPrueba, Proyecto
 from app.proyecto.presentation.views.casos_forms import CasosForm
-from app.proyecto.presentation.views.proyecto_forms import ProyectoForm
 
-app_service = ProyectoAppService()
+app_service = CasoPruebaAppService()
+
+class CasoPruebaListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    model = Proyecto
+    template_name = 'casoprueba/lista.html'
+    permission_required = 'proyecto.view_casoprueba'
+
+    @method_decorator(csrf_exempt)
+    # @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def handle_no_permission(self):
+        if not self.request.is_ajax():
+            return super().handle_no_permission()
+        return JsonResponse({
+            'status': 'error',
+            'message': 'Su sesión ha caducado, es necesario volver a inicar sesión para acceder a esta sección.'
+        }, status=401)
+
+    def post(self, request, *args, **kwargs):
+        data = app_service.get_datatable(request.POST)
+        return JsonResponse(data, safe=False)
+
+    def get_context_data(self, **kwargs):
+        self.proyecto = get_object_or_404(Proyecto, id=self.kwargs['proyecto_id'])
+
+        context = super().get_context_data(**kwargs)
+
+        context['proyecto'] = self.proyecto
+        context['title'] = 'Casos de prueba'
+        context['breadcrum'] = [
+            ('Proyectos', reverse('proyecto:proyecto_lista')),
+            ('Detalle', None),
+            ('Ciclos de prueba', None),
+        ]
+
+        return context
 
 class CasoPruebaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = CasoPrueba
@@ -27,7 +62,7 @@ class CasoPruebaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateV
     success_message = "Estimado usuario, se ha registrado satisfactoriamente la información."
 
     def get_success_url(self):
-        return reverse('proyecto:proyecto_detalle', args=[self.proyecto.id])
+        return reverse('proyecto:casoprueba_lista', args=[self.proyecto.id])
 
     def form_valid(self, form):
         self.proyecto = get_object_or_404(Proyecto, id=self.kwargs['proyecto_id'])
@@ -64,7 +99,7 @@ class CasoPruebaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateV
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('proyecto:proyecto_detalle', args=[self.proyecto.id])
+        return reverse('proyecto:casoprueba_lista', args=[self.proyecto.id])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
