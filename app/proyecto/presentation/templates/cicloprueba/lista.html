@@ -9,7 +9,7 @@
 {% if perms.proyecto.view_cicloprueba %}
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Administrar ciclos de prueba</h3>
+        <h3 class="card-title">Proyecto: {{ proyecto.nombre }}</h3>
         <div class="card-tools">
             {% if perms.proyecto.add_cicloprueba %}
             <a href="{% url 'proyecto:cicloprueba_crear' proyecto.id %}" class="btn btn-primary">
