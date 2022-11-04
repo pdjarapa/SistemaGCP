@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from django.conf import settings
 
 from app.core.presentation.views import views
 
@@ -29,3 +30,7 @@ urlpatterns = [
     path('', include('app.proyecto.services.mvc_urls')),
     path('api/v1/', include('app.proyecto.services.api_urls')),
 ]
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

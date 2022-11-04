@@ -1,5 +1,5 @@
 from django.urls import path
-from app.proyecto.presentation.views import views_casos, views_proyecto, views_ciclos
+from app.proyecto.presentation.views import views_casos, views_proyecto, views_ciclos, views_ejecucion
 
 app_name = 'proyecto'
 
@@ -18,4 +18,8 @@ urlpatterns = [
     path('ciclo_prueba/lista/<int:proyecto_id>', views_ciclos.CicloPruebaListView.as_view(), name='cicloprueba_lista'),
     path('ciclo_prueba/crear/<int:proyecto_id>', views_ciclos.CicloPruebaCreateView.as_view(), name='cicloprueba_crear'),
     path('ciclo_prueba/editar/<int:pk>', views_ciclos.CicloPruebaUpdateView.as_view(), name='cicloprueba_editar'),
+
+    path('ciclo_prueba/ejecutar/<int:ciclo_id>', views_ejecucion.EjecucionPruebaListView.as_view(), name='cicloprueba_ejecutar'),
+    path('ciclo_prueba/ejecutar/agregar/<int:ciclo_id>/<int:caso_id>', views_ejecucion.agregar_caso_ejecutar, name='cicloprueba_agregar_caso'),
+    path('ciclo_prueba/ejecutar/exec/<int:pk>', views_ejecucion.EjecucionPruebaUpdateView.as_view(), name='cicloprueba_ejecutar_caso'),
 ]

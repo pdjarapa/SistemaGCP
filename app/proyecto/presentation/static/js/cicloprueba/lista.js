@@ -7,6 +7,8 @@ $(document).ready(function () {
     $('#filtro_ciclo_activo').change(function () {
         oTableCiclos.draw();
     });
+
+    init_actions();
 });
 
 
@@ -73,7 +75,7 @@ function options_datatable_ciclos(){
                     <i class="fas fa-ellipsis-h"></i> \
                   </a> \
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"> \
-                    <a class="dropdown-item item-grupo-activar" href="javascript:void(0);">' + (row.activo ? 'Desactivar' : 'Activar') + '</a> \
+                    <a class="dropdown-item item-ciclo-ejecutar" href="javascript:void(0);">' + ('Ejecutar') + '</a> \
                   </div> \
                 </div>';
                 return html;
@@ -91,3 +93,15 @@ function options_datatable_ciclos(){
         }
     };
 };
+
+function init_actions(){
+    $(document).on('click', '.item-ciclo-ejecutar', function(e){
+
+        var div = $(this).parents('div.dropdown-grupo');
+
+        var id = $(div).data('id');
+        var url_ejecutar = $('#dt-ciclos').data('url_ejecutar');
+        console.log(url_ejecutar);
+        $(this).attr('href', url_ejecutar + id);
+    });
+}

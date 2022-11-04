@@ -17,6 +17,9 @@ from django.apps import apps
 BASE_DIR = Path(__file__).resolve().parent.parent
 print('BASE_DIR', BASE_DIR)
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 SYSTEM_NAME = "Sistema de Gestión de Casos de Prueba"
 SYSTEM_SNAME = "Sistema GCP"
 SYSTEM_ALIAS = "SGCP"

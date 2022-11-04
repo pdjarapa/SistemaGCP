@@ -36,6 +36,7 @@
         <table id="dt-ciclos" class="table" data-id="{{ proyecto.id }}"
                data-url="{% url 'proyecto:cicloprueba_lista' proyecto.id %}"
                data-url_detalle="{% url 'proyecto:cicloprueba_editar' 0 %}"
+               data-url_ejecutar="{% url 'proyecto:cicloprueba_ejecutar' 0 %}"
         >
             <thead>
                 <tr>

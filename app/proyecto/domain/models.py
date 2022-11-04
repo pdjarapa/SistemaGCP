@@ -48,7 +48,7 @@ class CasoPrueba(AuditModel):
     CHOICE_VARIEDAD = ((VARIEDAD_POSITVA, 'Positiva'), (VARIEDAD_NEGATIVA, 'Negativa'))
     CHOICE_PRIORIDAD = ((PIORIDAD_ALTA, 'Alta'), (PIORIDAD_MEDIA, 'Media'), (PIORIDAD_BAJA, 'Baja'))
     CHOICE_EVALUACION = ((EVALUACION_MANUAL, 'Manual'), (EVALUACION_AUTOMATICA, 'Automática'))
-    CHOICE_ESTADO = ((ESTADO_BORRADOR, 'Borrador'), (ESTADO_BLOQUEADA, 'Bloqueda'), (ESTADO_APROBADA, 'Aprobada'),
+    CHOICE_ESTADO = ((ESTADO_BORRADOR, 'Borrador'), (ESTADO_BLOQUEADA, 'Bloqueada'), (ESTADO_APROBADA, 'Aprobada'),
                      (ESTADO_FALLO, 'Fallo'))
 
     codigo = models.CharField(max_length=20)
@@ -94,4 +94,4 @@ class EjecucionPrueba(AuditModel):
     caso_prueba = models.ForeignKey(CasoPrueba, on_delete=models.CASCADE, related_name='pruebas_ejecutadas')
     estado = models.CharField(max_length=1, choices=CasoPrueba.CHOICE_ESTADO, default=CasoPrueba.ESTADO_BORRADOR)
     comentario = models.TextField(max_length=250, null=True, blank=True)
-    evidencia = models.ImageField(upload_to='evidencia/%Y/%m/%d/')
+    evidencia = models.ImageField(upload_to='evidencia/%Y/%m/%d/', null=True, blank=True)
