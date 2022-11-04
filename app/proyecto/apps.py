@@ -10,4 +10,3 @@ class ProyectosConfig(CleanAppConfig):
 
     def ready(self):
         super().ready()
-        print('post ready....')

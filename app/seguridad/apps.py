@@ -19,8 +19,6 @@ class SeguridadConfig(CleanAppConfig):
         #from ..seguridad.application import signals
         from ..seguridad.application import signals
 
-        print('path: ', Path(self.path))
-
         #from app.core.application.signals import populate_models
         #post_migrate.connect(populate_models, sender=self)
     grupos = []
