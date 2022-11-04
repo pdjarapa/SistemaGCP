@@ -172,7 +172,7 @@ function options_datatable_ejecucin(){
             }},
             {targets: [3], render: function (data, type, row) {
                 if (data){
-                    return $.validator.format('<a class="item-view-evidencia" src="{0}"><img src="{1}" width="128" /></a>', data, data);
+                    return $.validator.format('<a class="item-view-evidencia" src="{0}" title="Clic para ver imagen..."><img class="img-thumbnail" src="{1}" width="128" /></a>', data, data);
                 }
                 return '';
             }},
