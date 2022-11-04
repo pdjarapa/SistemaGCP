@@ -74,7 +74,7 @@ function options_datatable_casos(){
             {targets: [3], 'class': "text-right", render: function (data, type, row) {
                 var url =  url_agregar + row.id;
                 url = url.replace('/0/', '/'+ciclo_id+'/');
-                return $.validator.format('<a class="item-add-caso" href="javascript:void(0);" data-url="{0}"><i class="fas fa-cogs"></i> {1}</a>', url, '');
+                return $.validator.format('<a class="item-add-caso" href="javascript:void(0);" data-url="{0}"><i class="fas fa-plus"></i> {1}</a>', url, 'Agregar');
             }}
 
         ],
