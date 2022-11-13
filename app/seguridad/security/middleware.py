@@ -2,6 +2,7 @@ import time
 from importlib import import_module
 
 from django.conf import settings
+from django.contrib.auth.models import AnonymousUser
 from django.contrib.sessions.backends.base import UpdateError
 from django.core.exceptions import SuspiciousOperation
 from django.utils.cache import patch_vary_headers
@@ -10,6 +11,9 @@ from django.utils.http import http_date
 
 from threading import current_thread
 from django.middleware.common import CommonMiddleware
+
+from app.seguridad.domain.models import LogActivity
+
 _requests = {}
 
 
@@ -23,6 +27,52 @@ def get_username():
 class RequestMiddleware(CommonMiddleware):
     def process_request(self, request):
         _requests[current_thread()] = request
+
+        #Log
+        user_agent = request.META.get("HTTP_USER_AGENT")
+        print('META: ', request.META)
+
+        #TODO: https://allwin-raju-12.medium.com/django-get-browser-and-os-info-from-the-http-requests-ae32147a9519
+
+        #request.user_agent.browser.family  # returns 'Safari'
+        #request.user_agent.browser.version  # returns (14, 0)
+        #request.user_agent.browser.version_string  # returns '14.0'
+
+        #version = (10, 15, 6), version_string = '10.15.6')request.user_agent.os.family  # returns 'Mac OS X'
+        #request.user_agent.os.version  # returns (10, 15, 6)
+        #request.user_agent.os.version_string  # returns '10.15.6'
+
+        oagent = request.user_agent
+
+        print('browser', oagent.browser)
+        print('so', oagent.os)
+        print('device', oagent.device)
+        stype = LogActivity.TIPO_OTHER
+        if oagent.is_mobile:
+            stype = LogActivity.TIPO_MOBILE
+        if oagent.is_tablet:
+            stype = LogActivity.TIPO_TABLET
+        if oagent.is_pc:
+            stype = LogActivity.TIPO_PC
+
+
+
+        log = LogActivity(
+            user=request.user if request.user.is_authenticated else None,
+            user_agent=user_agent,
+            path=request.get_full_path(),
+            ip_address=request.META.get('REMOTE_ADDR'),
+            referer=request.META.get('HTTP_REFERER'),
+            content_type=request.META.get('CONTENT_TYPE'),
+            method=request.META.get('REQUEST_METHOD'),
+            is_ajax=request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest',
+            browser=oagent.browser.family,
+            system=oagent.os.family,
+            type=stype
+        )
+        log.save()
+
+
 
 class RemoteUserMiddleware(CommonMiddleware):
     def process_response(self, request, response):

@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from app.seguridad.domain.models import Funcionalidad, SessionActivity
-from app.seguridad.domain.models import FuncionalidadGroup
+from app.seguridad.domain.models import SessionActivity
 from app.seguridad.domain.models import Usuario
 
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
@@ -64,7 +63,5 @@ class SessionActivityAdmin(admin.ModelAdmin):
     def has_change_permission(self, request, obj=None):
         return False
 
-admin.site.register(Funcionalidad, FuncionalidadAdmin)
-admin.site.register(FuncionalidadGroup, FuncionalidadGrupoAdmin)
 admin.site.register(Usuario, UsuarioAdmin)
 admin.site.register(SessionActivity, SessionActivityAdmin)

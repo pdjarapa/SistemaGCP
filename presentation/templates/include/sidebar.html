@@ -2,10 +2,18 @@
       <nav class="mt-2 user-panel">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-            {% if perms.proyecto.view_sesiones %}
+            {% if perms.seguridad.view_sessionactivity %}
                 <li class="nav-item proceso-bandeja-item">
-					<a href="{% url 'seguridad:dashboard_sessions' %}" class="nav-link nav-toggle"> <i class="fas fa-user-clock"></i>
+					<a href="{% url 'seguridad:dashboard_sessions' %}" class="nav-link nav-toggle"> <i class="fas fa-diagnoses"></i>
 						<span class="title">Sesiones</span>
+					</a>
+				</li>
+            {% endif %}
+
+            {% if perms.seguridad.view_logactivity %}
+                <li class="nav-item proceso-bandeja-item">
+					<a href="{% url 'seguridad:dashboard_logs' %}" class="nav-link nav-toggle"> <i class="fas fa-tachometer-alt"></i>
+						<span class="title">Peticiones</span>
 					</a>
 				</li>
             {% endif %}

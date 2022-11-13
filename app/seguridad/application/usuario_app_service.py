@@ -8,7 +8,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.db.models import Q
 from django.template.loader import get_template
 
-from app.seguridad.domain.models import Funcionalidad, Usuario, NotificacionUsuario
+from app.seguridad.domain.models import Usuario
 
 class UsuarioAppService(object):
 
@@ -28,49 +28,6 @@ class UsuarioAppService(object):
                           'hijas': UsuarioAppService.get_funcionalidad_hijas(fun, qset)})
         return hijas
 
-    @staticmethod
-    def get_funcionalidades(usuario, modulo):
-        """
-        Retorna la funcionalidades del usuario ya sea django o angular
-        :param modulo:
-        :return:
-        """
-        if not usuario:
-            return []
-        qset = Q(funcionalidadesGroups__group__user=usuario, activo=True, modulo=modulo)
-        respuesta = []
-        funcionalidades_padre = Funcionalidad.objects.filter(qset, padre_id__isnull=True).distinct().order_by(
-            'orden').all()
-        for funcionalidad in funcionalidades_padre:
-            respuesta.append({'nombre': funcionalidad.nombre,
-                              'icon': funcionalidad.icon,
-                              'formulario': funcionalidad.formulario,
-                              'hijas': UsuarioAppService.get_funcionalidad_hijas(funcionalidad, qset)})
-
-        return respuesta
-
-    @staticmethod
-    def get_nro_notificaciones(usuario):
-        """
-        Retorna el numero de notificaciones pendientes que tiene el usuario
-        :param modulo:
-        :return:
-        """
-        if not usuario:
-            return 0
-        return NotificacionUsuario.objects.filter(usuario=usuario, estado=NotificacionUsuario.ESTADO_PENDIENTE).count()
-
-    @staticmethod
-    def get_ultimas_notificaciones(usuario):
-        """
-        Retorna las ultimas 5 notificaciones del usuario
-        :param modulo:
-        :return:
-        """
-        if usuario:
-            return NotificacionUsuario.objects.filter(usuario=usuario).order_by('-notificacion__created_at')[:10]
-        else:
-            return NotificacionUsuario.objects.none()
 
     @staticmethod
     def get_usuario(data_usuario):

@@ -1,5 +1,4 @@
 from django.db import models
-from app.seguridad.security.middleware import get_username
 from datetime import datetime
 
 # Create your models here.
@@ -18,6 +17,7 @@ class AuditModel(BaseModel):
         abstract = True
 
     def save(self, *args, **kwargs):
+        from app.seguridad.security.middleware import get_username
         req = get_username()
         if req:
             if not self.pk:
@@ -27,6 +27,3 @@ class AuditModel(BaseModel):
             self.updated_at = datetime.today()
 
         super(AuditModel, self).save(*args, **kwargs)
-
-class Xyz(BaseModel):
-    created_atxx = models.DateTimeField(auto_now_add=True, null=True)

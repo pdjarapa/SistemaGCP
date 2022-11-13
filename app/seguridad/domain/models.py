@@ -12,58 +12,6 @@ from app.core.application.core_app_service import CoreAppService
 from app.core.domain.models import AuditModel
 
 
-class FuncionalidadManager(models.Manager):
-    """
-    Modelo para poder referenciar a una funcionalidad por su código
-    """
-
-    def get_by_natural_key(self, codigo):
-        return self.get(codigo=codigo)
-
-
-class Funcionalidad(models.Model):
-    MODULO_SIAAF = 'S'
-    MODULO_ANGULAR = 'A'
-    TIPO_MODULO = (
-        (MODULO_ANGULAR, 'Angular'),
-        (MODULO_SIAAF, 'Siaaf'),
-    )
-
-    activo = models.BooleanField(default=False)
-    codigo = models.CharField(max_length=100)
-    descripcion = models.TextField(blank=True, null=True)
-    formulario = models.CharField(max_length=250)
-    icon = models.CharField(max_length=100)
-    modulo = models.CharField(max_length=1, choices=TIPO_MODULO, default=MODULO_ANGULAR, )
-    mostrar = models.BooleanField(default=False)
-    nombre = models.CharField(max_length=250)
-    orden = models.IntegerField()
-
-    padre = models.ForeignKey('self', blank=True, related_name='funcionalidades', null=True, on_delete=models.SET_NULL)
-
-    objects = FuncionalidadManager()
-
-    class Meta:
-        ordering = ('nombre',)
-        unique_together = ('codigo',)
-
-    def __str__(self):
-        return self.nombre
-
-
-class FuncionalidadGroup(models.Model):
-    funcionalidad = models.ForeignKey('Funcionalidad', verbose_name=u'Funcionalidad',
-                                      related_name='funcionalidadesGroups', on_delete=models.CASCADE)
-    group = models.ForeignKey('auth.Group', verbose_name=u'Group', related_name='funcionalidadesGroups',
-                              on_delete=models.CASCADE)
-
-    class Meta:
-        ordering = ('group',)
-
-    def __str__(self):
-        return self.funcionalidad.nombre + " " + self.group.name
-
-
 class ManejadorUsuarios(BaseUserManager):
     # use_in_migrations = True
 
@@ -93,6 +41,26 @@ class ManejadorUsuarios(BaseUserManager):
 
         return self._create_user(correo_electronico, password, **extra_fields)
 
+class LogActivity(models.Model):
+    TIPO_OTHER = 'O'
+    TIPO_MOBILE = 'M'
+    TIPO_TABLET = 'T'
+    TIPO_PC = 'P'
+
+    CHOICE_TIPO = ((TIPO_MOBILE, 'Mobile'), (TIPO_TABLET, 'Tablet'), (TIPO_PC, 'Pc'))
+
+    date = models.DateTimeField(auto_now_add=True)
+    content_type = models.CharField(max_length=80, null=True)
+    method = models.CharField(max_length=8, null=True)
+    ip_address = models.GenericIPAddressField(null=True)
+    user_agent = models.TextField(null=True)
+    system = models.CharField(max_length=20, null=True)
+    browser = models.TextField(max_length=20, null=True)
+    type = models.CharField(max_length=1, choices=CHOICE_TIPO, default=TIPO_OTHER)
+    path = models.TextField(null=True)
+    referer = models.TextField(null=True)
+    is_ajax = models.BooleanField(null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 
 class SessionActivity(models.Model):
 
@@ -175,28 +143,5 @@ class Usuario(AbstractBaseUser, PermissionsMixin, AuditModel):
     def get_display_name(self):
         return self.descripcion if self.descripcion else self.correo_electronico
 
-class Notificacion(AuditModel):
-    asunto = models.TextField()
-    envio_email = models.DateField(null=True)
-    mensaje = models.TextField()
-    url = models.TextField(null=True)
-
-class NotificacionUsuario(models.Model):
-    ESTADO_VISTO = 'V'
-    ESTADO_LEIDO = 'L'
-    ESTADO_PENDIENTE = 'P'
-    CHOICE_ESTADO = ((ESTADO_PENDIENTE, 'Pendiente'),
-                     (ESTADO_VISTO, 'Visto'),
-                     (ESTADO_LEIDO, 'Leído'),)
-
-    estado = models.CharField(max_length=1, choices=CHOICE_ESTADO, default=ESTADO_PENDIENTE)
-
-    notificacion = models.ForeignKey('Notificacion', on_delete=models.CASCADE)
-    usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
-
-    class Meta:
-        ordering = ['usuario', '-notificacion__created_at']
-
 user_logged_in.connect(SessionActivity.create_session_activity)
 user_logged_out.connect(SessionActivity.end_session_activity)
-#auditlog.register(NotificacionUsuario, include_fields=['estado'])
