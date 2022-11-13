@@ -29,7 +29,11 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Activo: </label>
             <div class="col-sm-10">
-                <p class="form-control-static">{% if proyecto.activo %}Si{% else %}No{% endif %}</p>
+                <p class="form-control-static">
+                    <span class="badge badge-{% if proyecto.activo %}success{% else %}danger{% endif %}">
+                        {% if proyecto.activo %}Si{% else %}No{% endif %}
+                    </span>
+                </p>
             </div>
         </div>
 
