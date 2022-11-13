@@ -6,7 +6,6 @@ from app.seguridad.presentation.views import views_seguridad
 admin.autodiscover()
 
 urlpatterns = [
-    path('notificacion-usuario/detalle/<int:id>', views_seguridad.notificacion_usuario_detalle, name='notificacion_usuario_detalle'),
-    path('notificacion-usuario/lista', views_seguridad.notificacion_usuario_lista, name='notificacion_usuario_lista'),
-    path('notificacion-usuario/lista-paginador', views_seguridad.notificacion_usuario_lista_paginador, name='notificacion_usuario_lista_paginador'),
+    path('dashboard/sesiones', views_seguridad.session_activity_lista, name='dashboard_sessions'),
+    path('dashboard/sesiones/paginator', views_seguridad.session_activity_lista_paginador, name='dashboard_sessions_paginator'),
 ]
