@@ -76,7 +76,7 @@ class CasoPruebaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateV
 
         context = super().get_context_data(**kwargs)
 
-        context['casoprueba'] = self.proyecto
+        context['proyecto'] = self.proyecto
         context['title'] = 'Crear caso prueba'
         context['breadcrum'] = [
             ('Proyectos', reverse('proyecto:proyecto_lista')),

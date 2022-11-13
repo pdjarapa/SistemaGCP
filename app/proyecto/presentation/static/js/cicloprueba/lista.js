@@ -53,12 +53,13 @@ function options_datatable_ciclos(){
         columns: [
             {"data": "nombre"},
             {"data": "descripcion"},
+            {"data": "casos"},
             {"data": "id"},
         ],
         columnDefs: [
             {
-                orderable: true,
-                targets: [0,1,2],
+                orderable: false,
+                targets: [2],
                 class: '',
             },
             {targets: [0], render: function (data, type, row) {
@@ -67,7 +68,10 @@ function options_datatable_ciclos(){
             {targets: [1], render: function (data, type, row) {
                 return data;
             }},
-            {targets: [2], 'class': "text-right", render: function (data, type, row) {
+            {targets: [2], render: function (data, type, row) {
+                return data;
+            }},
+            {targets: [3], 'class': "text-right", render: function (data, type, row) {
                 var url_edit =  url_detalle + row.id;
                 var url_exec = url_ejecutar + row.id;
                 var html = '';

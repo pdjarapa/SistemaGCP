@@ -65,6 +65,8 @@ function default_options_datatable(){
         columns: [
             {"data": "nombre"},
             {"data": "descripcion"},
+            {"data": "ciclos"},
+            {"data": "casos"},
             {"data": "activo"},
             {"data": "created_by"},
             {"data": "created_at"},
@@ -72,8 +74,8 @@ function default_options_datatable(){
         ],
         columnDefs: [
             {
-                orderable: true,
-                targets: [0,1,2],
+                orderable: false,
+                targets: [2, 3],
                 class: '',
             },
             {targets: [0], render: function (data, type, row) {
@@ -84,13 +86,25 @@ function default_options_datatable(){
                 return data;
             }},
             {targets: [2], render: function (data, type, row) {
+                return data;
+            }},
+            {targets: [3], render: function (data, type, row) {
+                return data;
+            }},
+            {targets: [4], render: function (data, type, row) {
                 var html = [
-                '<span class="label label-' + (data ? 'success' : 'danger') + '">',
+                '<span class="badge badge-' + (data ? 'success' : 'danger') + '">',
                 (data ? 'SI' : 'NO'),
                 '</span>'];
                 return html.join('');
             }},
-            {targets: [5], 'class': "text-right", render: function (data, type, row) {
+            {targets: [5], render: function (data, type, row) {
+                return data;
+            }},
+            {targets: [6], render: function (data, type, row) {
+                return data;
+            }},
+            {targets: [7], 'class': "text-right", render: function (data, type, row) {
                 var html =
                 '<div class="dropdown show dropdown-espacio" data-id="'+ row.id +'" data-activo="' + row.activo + '"> \
                   <a class="btn btn-link btn-xs dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> \

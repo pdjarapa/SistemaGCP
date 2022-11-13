@@ -105,8 +105,13 @@ class EjecucionPruebaUpdateView(PermissionRequiredMixin, SuccessMessageMixin, Up
 
     def form_valid(self, form):
         self.ciclo_prueba = form.instance.ciclo_prueba
+        self.caso_prueba = form.instance.caso_prueba
+        valid = super().form_valid(form)
 
-        return super().form_valid(form)
+        #Actualiza el estado del caso de prueba (validar estado en todos los ciclos de prueba)
+        app_service.procesar_estado(form.instance)
+
+        return valid
 
     def get_success_url(self):
         return reverse('proyecto:cicloprueba_ejecutar', args=[self.object.ciclo_prueba.id])

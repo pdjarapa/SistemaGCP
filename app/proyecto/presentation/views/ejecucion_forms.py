@@ -32,7 +32,12 @@ class EjecucionForm(forms.ModelForm):
             'evidencia',
             ButtonHolder(
                 HTML(
-                    '<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar </button>')
+                    '<button type="submit" class="btn btn-primary disabled" disabled="disabled"><i class="fa fa-save"></i> Guardar</button>'
+                    if self.instance.ciclo_prueba.proyecto.activo is False else
+                    '<button type="submit" class="btn btn-primary %s"><i class="fa fa-save"></i> Guardar</button>'
+                )
+
+                #HTML('<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar </button>')
             )
 
         )

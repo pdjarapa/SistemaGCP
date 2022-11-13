@@ -65,6 +65,8 @@ class ProyectoAppService(object):
              'activo': it.activo,
              'created_by': it.created_by,
              'created_at': it.created_at.strftime(ProyectoAppService.DATETIME_FORMAT),
+             'casos': it.casos_prueba.count(),
+             'ciclos': it.ciclos_prueba.count(),
              }
             for it in params.init_items(queryset)
         ]

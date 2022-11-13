@@ -14,10 +14,14 @@
     <div class="card-header">
         <h3 class="card-title">Proyecto: {{ proyecto.nombre }}</h3>
         <div class="card-tools">
-            {% if perms.proyecto.add_casoprueba %}
+            {% if perms.proyecto.add_casoprueba and proyecto.activo %}
             <a href="{% url 'proyecto:casoprueba_crear' proyecto.id %}" class="btn btn-primary">
                 <i class="fas fa-users"></i> Nuevo
             </a>
+            {% else %}
+                <span class="btn btn-primary disabled">
+                    <i class="fas fa-users"></i> Nuevo
+                </span>
             {% endif %}
         </div>
     </div>
@@ -46,6 +50,7 @@
                     <th>Variedad</th>
                     <th>Prioridad</th>
                     <th>Estado</th>
+                    <th>N° Ciclos</th>
                     <th>Acción</th>
                 </tr>
             </thead>

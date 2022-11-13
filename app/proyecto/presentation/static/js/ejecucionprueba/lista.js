@@ -36,6 +36,7 @@ function options_datatable_casos(){
             type: 'POST',
             data: function ( d ) {
                 d.proyecto_id = proyecto_id;
+                d.ciclo_id = ciclo_id;
             },
             //dataSrc: "",
             cache: false,
@@ -100,6 +101,7 @@ function init_actions(oTableCasos, oTableEjecucion){
                 mensaje_exito(res.message);
             }
             oTableEjecucion.draw(false); //false para no cambiar de página
+            oTableCasos.draw(false);
         });
     });
 
@@ -152,6 +154,8 @@ function options_datatable_ejecucin(){
             {"data": "caso_prueba__nombre"},
             {"data": "comentario"},
             {"data": "evidencia"},
+            {"data": 'updated_at'},
+            {"data": "updated_by"},
             {"data": "estado"},
             {"data": "id"},
         ],
@@ -176,7 +180,13 @@ function options_datatable_ejecucin(){
                 }
                 return '';
             }},
-             {targets: [4], render: function (data, type, row) {
+            {targets: [4], render: function (data, type, row) {
+                return data;
+            }},
+            {targets: [5], render: function (data, type, row) {
+                return data;
+            }},
+             {targets: [6], render: function (data, type, row) {
 
                  if (data === 'Aprobada'){
                      return $.validator.format('<span class="badge badge-success">{0}</span>', data);
@@ -189,7 +199,7 @@ function options_datatable_ejecucin(){
                  }
 
             }},
-            {targets: [5], 'class': "text-right", render: function (data, type, row) {
+            {targets: [7], 'class': "text-right", render: function (data, type, row) {
                 var url =  url_ejecutar + row.id;
                 return $.validator.format('<a class="item-add-caso-ejecutar" href="{0}"><i class="fas fa-cogs"></i> {1}</a>', url, '');
             }}

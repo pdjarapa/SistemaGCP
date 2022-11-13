@@ -45,6 +45,7 @@ class CicloPruebaAppService(BaseAppService):
             {'id': it.id,
              'nombre': it.nombre,
              'descripcion': it.descripcion,
+             'casos': it.pruebas_ejecutadas.count(),
              }
             for it in dtable.init_items(qfilter)
         ]
@@ -89,7 +90,9 @@ class CicloPruebaAppService(BaseAppService):
              'caso_prueba__descripcion': it.caso_prueba.descripcion,
              'comentario': it.comentario,
              'estado': CicloPruebaAppService.get_str_estado_caso_prueba(it.estado),
-             'evidencia': it.evidencia.url if it.evidencia else ''
+             'evidencia': it.evidencia.url if it.evidencia else '',
+             'updated_at': it.updated_at.strftime(BaseAppService.DATETIME_FORMAT) if it.updated_at else '',
+             'updated_by': it.updated_by
              }
             for it in dtable.init_items(qfilter)
         ]
@@ -106,3 +109,32 @@ class CicloPruebaAppService(BaseAppService):
             ejecucion = EjecucionPrueba(ciclo_prueba_id=ciclo_id, caso_prueba_id=caso_id)
             ejecucion.save()
             return {'status': 'ok', 'message': '¡Se agregó corretamente el caso de prueba!'}
+
+    @staticmethod
+    def procesar_estado(ejecucion_prueba):
+        proyecto = ejecucion_prueba.ciclo_prueba.proyecto
+        ciclo_prueba = ejecucion_prueba.ciclo_prueba
+        caso_prueba = ejecucion_prueba.caso_prueba
+
+        lista = EjecucionPrueba.objects.filter(caso_prueba_id=caso_prueba.id)
+        total = lista.count()
+        total_borrador = lista.filter(estado=CasoPrueba.ESTADO_BORRADOR).count()
+        total_ejecutados = lista.filter(estado=CasoPrueba.ESTADO_APROBADA).count()
+        total_fallo = lista.filter(estado=CasoPrueba.ESTADO_FALLO).count()
+        total_bloqueada = lista.filter(estado=CasoPrueba.ESTADO_BLOQUEADA).count()
+
+        print('total', total)
+        print('total_borrador', total_borrador)
+        print('total_ejecutados', total_ejecutados)
+        print('total_fallo', total_fallo)
+        print('total_bloqueada', total_bloqueada)
+
+        if total_ejecutados == total:
+            caso_prueba.estado = CasoPrueba.ESTADO_APROBADA
+        elif total_borrador == total:
+            caso_prueba.estado = CasoPrueba.ESTADO_BORRADOR
+        elif total_bloqueada:
+            caso_prueba.estado = CasoPrueba.ESTADO_BLOQUEADA
+        elif total_fallo:
+            caso_prueba.estado = CasoPrueba.ESTADO_FALLO
+        caso_prueba.save()

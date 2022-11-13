@@ -55,6 +55,7 @@ function options_datatable_casos(){
             {"data": "variedad"},
             {"data": "prioridad"},
             {'data': "estado"},
+            {'data': 'ciclos'},
             {"data": "id"},
         ],
         columnDefs: [
@@ -63,6 +64,7 @@ function options_datatable_casos(){
                 targets: [0,1,2],
                 class: '',
             },
+            {orderable: false,  targets: [6]},
             {targets: [0], render: function (data, type, row) {
                 return data;
             }},
@@ -79,9 +81,20 @@ function options_datatable_casos(){
                 return data;
             }},
             {targets: [5], render: function (data, type, row) {
+                var css = 'badge-secondary';
+                if (data === 'Aprobada'){
+                    css = 'badge-success';
+                }else if(data === 'Fallo') {
+                    css = 'badge-danger';
+                }else if(data === 'Bloqueada') {
+                    css = 'badge-warning';
+                }
+                return $.validator.format('<span class="badge {0}">{1}</span>', css, data, row.ciclos);
+            }},
+            {targets: [6], render: function (data, type, row) {
                 return data;
             }},
-            {targets: [6], 'class': "text-right", render: function (data, type, row) {
+            {targets: [7], 'class': "text-right", render: function (data, type, row) {
                 /*var html =
                 '<div class="dropdown show dropdown-grupo" data-id="'+ row.id +'" data-activo="' + row.activo + '"> \
                   <a class="btn btn-link btn-xs dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> \

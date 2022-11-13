@@ -10,7 +10,7 @@ from app.proyecto.domain.models import CasoPrueba, Proyecto
 class CasosForm(forms.ModelForm):
     class Meta:
         model = CasoPrueba
-        fields=('codigo', 'nombre', 'descripcion','precondicion','pasos','resultado_esperado','tipo','variedad','prioridad','estado','evaluacion','postcondicion','observacion')
+        fields=('codigo', 'nombre', 'descripcion','precondicion','pasos','resultado_esperado','tipo','variedad','prioridad','evaluacion','postcondicion','observacion')
         widgets = {
             'codigo': forms.TextInput(attrs={'type': 'text', 'placeholder': ''}),
             'nombre': forms.TextInput(attrs={'type': 'text', 'placeholder': ''}),
@@ -22,7 +22,7 @@ class CasosForm(forms.ModelForm):
             'evaluacion':forms.Select(),
             'variedad':forms.Select(),
             'prioridad':forms.Select(),
-            'estado':forms.Select(),
+            #'estado':forms.Select(),
             'postcondicion': forms.TextInput(attrs={'type': 'text', 'placeholder': ''}),
             'observacion': forms.Textarea(attrs={'rows':3}),
         }
@@ -47,7 +47,7 @@ class CasosForm(forms.ModelForm):
             'pasos',
             'resultado_esperado',
             Div(
-                Div('tipo', 'estado', css_class="col-md-4"),
+                Div('tipo', HTML('<div class="form-group"><label>Estado</label> <div>%s</div></div>' % self.instance.get_estado_display()), css_class="col-md-4"),
                 Div('prioridad', 'evaluacion', css_class="col-md-4"),
                 Div('variedad', css_class="col-md-4"),
                 css_class='row'
@@ -56,7 +56,10 @@ class CasosForm(forms.ModelForm):
             'observacion',
             ButtonHolder(
                 HTML(
-                    '<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar </button>')
+                    '<button type="submit" class="btn btn-primary disabled" disabled="disabled"><i class="fa fa-save"></i> Guardar</button>'
+                    if self.instance.id and self.instance.proyecto.activo is False else
+                    '<button type="submit" class="btn btn-primary %s"><i class="fa fa-save"></i> Guardar</button>'
+                )
             )
 
         )
