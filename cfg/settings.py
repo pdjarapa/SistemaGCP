@@ -130,9 +130,9 @@ DATABASES = {
           'options': '-c search_path=django,public'
       },
       'NAME': 'gpc',
-      'USER': 'postgres',
-      'PASSWORD': 'postgres',
-      'HOST': '127.0.0.1',
+      'USER': 'sgcp@siscaspru-dbpos',
+      'PASSWORD': 'Desarrollo1',
+      'HOST': 'siscaspru-dbpos.postgres.database.azure.com',
       'PORT': '5432',
 
   },
