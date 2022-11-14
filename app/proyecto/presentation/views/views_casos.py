@@ -28,7 +28,7 @@ class CasoPruebaListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
         return super().dispatch(request, *args, **kwargs)
 
     def handle_no_permission(self):
-        if not self.request.is_ajax():
+        if not self.request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             return super().handle_no_permission()
         return JsonResponse({
             'status': 'error',

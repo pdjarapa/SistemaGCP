@@ -40,9 +40,10 @@ CUSTOM_APP_STATIC_DIR = "presentation" + os.sep + "static"
 SECRET_KEY = 'django-insecure-_zs9t)koy41f$!8vrwy#5(vvzuu+q$&lj%a80_le7oiu6!zq&3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'seguridad.Usuario'
 LOGIN_URL= '/seguridad/accounts/login'
